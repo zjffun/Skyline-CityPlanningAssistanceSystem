@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>阜新市三维规划辅助系统</title>
+  <link rel="stylesheet" type="text/css" href="./jquery-easyui/easyui.css">
+  <link rel="stylesheet" type="text/css" href="./jquery-easyui/icon.css">
+  <link rel="stylesheet" type="text/css" href="./jquery-easyui/ribbon.css">
+  <link rel="stylesheet" type="text/css" href="./jquery-easyui/ribbon-icon.css">
+  <link rel="stylesheet" type="text/css" href="./css/skyline-ribbon-icon.css">
+  <style>
+  /*修改最大的按钮的样式*/
+  .l-btn-large .l-btn-icon-top .l-btn-icon {
+    margin: 0 0 0 -25px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+  }
+  .l-btn-large .l-btn-icon-top .l-btn-text {
+    margin-top: 50px;
+    line-height: 24px;
+    min-width: 50px;
+  }
+  </style>
+  <script>
+  </script>
+</head>
+<!-- data-options="fit:true" -->
+<body id="skyline-layout" >
+
+  <!-- 菜单栏 -->
+  <div data-options="region:'north',split:true" style="width:100%;height:150px;max-height:150px">
+    <div id="skyline-ribbon"></div>
+  </div>
+  <!-- 底部信息 -->
+  <div data-options="region:'south'" style="height:40px;"></div>
+  <!-- 工程树 -->
+  <div data-options="region:'west',title:'工程树',split:true" style="width:250px;">
+    <!-- <object id="TerraExplorerInformationWindow" classid="CLSID:3a4f9193-65a8-11d5-85c1-0001023952c1"></object> -->
+  </div>
+  <!-- 工作空间 -->
+  <div data-options="region:'center',title:'MAP',iconCls:'icon-ok'">
+    <!-- <object id="TerraExplorer3DWindow" classid="CLSID:3a4f9192-65a8-11d5-85c1-0001023952c1" style="width:100%;height: 100%;"></object> -->
+  </div>
+  <!-- <object id="SGWorld" classid="CLSID:3a4f9197-65a8-11d5-85c1-0001023952c1" style="visibility:hidden;"></object> -->
+  <script type="text/javascript" src="./jquery-easyui/jquery.min.js"></script>
+  <script type="text/javascript" src="./jquery-easyui/jquery.easyui.min.js"></script>
+  <script type="text/javascript" src="./jquery-easyui/jquery.ribbon.js"></script>
+  <script type="text/javascript" src="./dist/skyline.cpas.js"></script>
+  <script>
+    $(window).load(function(){
+      // 加载布局
+      var $skyline_layout = CPAS.load_layout($('#skyline-layout'))
+      // 加载工具条
+      window.$SR = CPAS.load_ribbon($('#skyline-ribbon'))
+      // 加载skyline
+      CPAS.load_fly($skyline_layout)
+    });
+  </script>
+</body>
+</html>
+

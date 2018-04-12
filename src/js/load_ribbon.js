@@ -1,0 +1,58 @@
+import {ribbon_data, ribbon_btns} from './load_ribbon_conf'
+export default function($skyline_ribbon){
+  // 使用ribbon_data，ribbon_btns
+  ribbon_data
+  ribbon_btns
+  console.log(ribbon_data,ribbon_btns)
+  // 给jquery easyui拓展label
+  $.fn.label = function(options){
+    if (typeof options == 'object'){
+      this.css({
+        'float': 'left',
+        'color': '#444',
+        'padding': '1px',
+        'text-decoration': 'none',
+        'display': 'inline-block',
+        'overflow': 'hidden',
+        'margin': '0',
+        'cursor': 'pointer',
+        'outline': 'none',
+        'text-align': 'center',
+        'vertical-align': 'middle',
+        'font-size': '12px',
+        'line-height': '24px'
+      })
+      this.append(options.text)
+    }
+  };
+  
+  ////////////////////////////////
+  $.parser.plugins.push('label');
+  var ribbon = $skyline_ribbon.ribbon({
+      data: ribbon_data,
+      onClick: function(name, target){
+        // 点击了工具
+        // alert(name);
+        console.log(name, target)
+        // eval(name);
+      }
+  }).tabs({
+    onSelect: function(title, index){
+      // 选择了tab（从0开始）
+      switch(index){
+        case 0:
+          break;
+        case 1:
+          break;
+        case 2:
+          break;
+        case 3:
+          break;
+        default:
+          break;
+      }
+    }
+  });
+  ribbon.btns = ribbon_btns
+  return ribbon
+}

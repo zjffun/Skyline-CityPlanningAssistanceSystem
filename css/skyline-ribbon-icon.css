@@ -1,0 +1,125 @@
+.icon-large{
+	background-size: 32px 32px !important;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.icon-small{
+	background-size: 16px 16px !important;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+/*主页*/
+.icon-choose{background-image: url('images/choose.png')}
+.icon-attribute{background-image: url('images/attribute.png')}
+.icon-information{background-image: url('images/information.png')}
+.icon-area{background-image: url('images/area.png')}
+.icon-time{background-image: url('images/time.png')}
+.icon-sun{background-image: url('images/sun.png')}
+.icon-shadow{background-image: url('images/shadow.png')}
+.icon-underground{background-image: url('images/underground.png')}
+.icon-layer{background-image: url('images/layer.png')}
+.icon-grid{background-image: url('images/grid.png')}
+.icon-savorPoint{background-image: url('images/savorPoint.png')}
+.icon-treeInformation{background-image: url('images/treeInformation.png')}
+.icon-group{background-image: url('images/group.png')}
+.icon-paste{background-image: url('images/paste.png')}
+.icon-copy{background-image: url('images/copy.png')}
+.icon-shear{background-image: url('images/shear.png')}
+.icon-delete{background-image: url('images/delete.png')}
+/*分析*/
+.icon-horizontal{background-image: url('images/horizontal.png')}
+.icon-space{background-image: url('images/space.png')}
+.icon-vertical{background-image: url('images/vertical.png')}
+.icon-area{background-image: url('images/area.png')}
+.icon-threeDarea{background-image: url('images/threeDarea.png')}
+.icon-denggao{background-image: url('images/denggao.png')}
+.icon-Slope{background-image: url('images/Slope.png')}
+.icon-path{background-image: url('images/path.png')}
+.icon-poumian{background-image: url('images/poumian.png')}
+.icon-yanmofenxi{background-image: url('images/yanmofenxi.png')}
+.icon-sight{background-image: url('images/sight.png')}
+.icon-threeD{background-image: url('images/threeD.png')}
+.icon-perspective{background-image: url('images/perspective.png')}
+.icon-pengzhuang{background-image: url('images/pengzhuang.png')}
+/*导航*/
+.icon-drag{background-image: url('images/drag.png')}
+.icon-huadong{background-image: url('images/huadong.png')}
+.icon-zhuangwan{background-image: url('images/zhuangwan.png')}
+.icon-threeD_{background-image: url('images/threeD_.png')}
+.icon-twoD{background-image: url('images/twoD.png')}
+.icon-zhibeidaohang{background-image: url('images/zhibeidaohang.png')}
+.icon-suofang{background-image: url('images/suofang.png')}
+.icon-zhibeizhen{background-image: url('images/zhibeizhen.png')}
+.icon-huanrao{background-image: url('images/huanrao.png')}
+.icon-tuoyuan{background-image: url('images/tuoyuan.png')}
+.icon-Arc{background-image: url('images/Arc.png')}
+.icon-line{background-image: url('images/line.png')}
+.icon-houmian{background-image: url('images/houmian.png')}
+.icon-up{background-image: url('images/up.png')}
+.icon-down{background-image: url('images/down.png')}
+.icon-right{background-image: url('images/right.png')}
+.icon-left{background-image: url('images/left.png')}
+.icon-houshang{background-image: url('images/houshang.png')}
+.icon-jiashi{background-image: url('images/jiashi.png')}
+.icon-dimain{background-image: url('images/dimain.png')}
+/*视图*/
+.icon-zoomIn{background-image: url('images/zoomIn.png')}
+.icon-zoomOut{background-image: url('images/zoomOut.png')}
+.icon-all{background-image: url('images/all.png')}
+.icon-Eye{background-image: url('images/Eye.png')}
+.icon-kongjian{background-image: url('images/kongjian.png')}
+.icon-shizi{background-image: url('images/shizi.png')}
+.icon-zhuangtai{background-image: url('images/zhuangtai.png')}
+.icon-bili{background-image: url('images/bili.png')}
+.icon-hud{background-image: url('images/hud.png')}
+/*对象*/
+.icon-wenben{background-image: url('images/wenben.png')}
+.icon-tupian{background-image: url('images/tupian.png')}
+.icon-zhexian{background-image: url('images/zhexian.png')}
+.icon-duobianxing{background-image: url('images/duobianxing.png')}
+.icon-juxing{background-image: url('images/juxing.png')}
+.icon-zhengduobian{background-image: url('images/zhengduobian.png')}
+.icon-yuan{background-image: url('images/yuan.png')}
+.icon-tuoyuan{background-image: url('images/tuoyuan.png')}
+.icon-hu{background-image: url('images/hu.png')}
+.icon-jiantou{background-image: url('images/jiantou.png')}
+.icon-sanweimoxing{background-image: url('images/sanweimoxing.png')}
+.icon-object{background-image: url('images/object.png')}
+.icon-qiu{background-image: url('images/qiu.png')}
+.icon-sanweijiantou{background-image: url('images/sanweijiantou.png')}
+.icon-yuanzhu{background-image: url('images/yuanzhu.png')}
+.icon-dimian{background-image: url('images/dimian.png')}
+.icon-kongzhong{background-image: url('images/kongzhong.png')}
+/*图层编辑*/
+.icon-attribute{background-image: url('images/attribute.png')}
+.icon-shuxingbiao{background-image: url('images/shuxingbiao.png')}
+.icon-choose{background-image: url('images/choose.png')}
+.icon-area{background-image: url('images/area.png')}
+.icon-line{background-image: url('images/line.png')}
+.icon-huapoint{background-image: url('images/huapoint.png')}
+.icon-objectC{background-image: url('images/objectC.png')}
+/*演示汇报*/
+.icon-chuangjianyanshi{background-image: url('images/chuangjianyanshi.png')}
+.icon-jiaxingqudian{background-image: url('images/jiaxingqudian.png')}
+.icon-jiluguiji{background-image: url('images/jiluguiji.png')}
+.icon-tianjiabiaoti{background-image: url('images/tianjiabiaoti.png')}
+.icon-bianjigongju{background-image: url('images/bianjigongju.png')}
+.icon-bofang{background-image: url('images/bofang.png')}
+.icon-false{background-image: url('')}
+.icon-false{background-image: url('')}
+.icon-false{background-image: url('')}
+.icon-chuangjianshipin1{background-image: url('images/chuangjianshipin1.png')}
+.icon-false{background-image: url('')}
+.icon-false{background-image: url('')}
+.icon-false{background-image: url('')}
+/*工具*/
+.icon-ditijietu{background-image: url('images/ditijietu.png')}
+.icon-dixingkaiwa{background-image: url('images/dixingkaiwa.png')}
+.icon-xianshiquanbu{background-image: url('images/xianshiquanbu.png')}
+.icon-yinchangquanbu{background-image: url('images/yinchangquanbu.png')}
+.icon-zhikan{background-image: url('images/zhikan.png')}
+.icon-choose{background-image: url('images/choose.png')}
+.icon-area{background-image: url('images/area.png')}
+.icon-objectC{background-image: url('images/objectC.png')}
+.icon-close{background-image: url('images/close.png')}
