@@ -1,4 +1,5 @@
 import {ribbon_data, ribbon_btns} from './load_ribbon_conf'
+import ribbon_click from './ribbon_click'
 export default function($skyline_ribbon){
   // 使用ribbon_data，ribbon_btns
   ribbon_data
@@ -29,13 +30,11 @@ export default function($skyline_ribbon){
   ////////////////////////////////
   $.parser.plugins.push('label');
   var ribbon = $skyline_ribbon.ribbon({
-      data: ribbon_data,
-      onClick: function(name, target){
-        // 点击了工具
-        // alert(name);
-        console.log(name, target)
-        // eval(name);
-      }
+    data: ribbon_data,
+    onClick: function(name, target){
+      console.log(name, target)
+      ribbon_click(name, target)
+    }
   }).tabs({
     onSelect: function(title, index){
       // 选择了tab（从0开始）

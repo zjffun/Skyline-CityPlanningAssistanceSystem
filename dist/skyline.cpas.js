@@ -9,347 +9,734 @@ function load_fly($skyline_layout){
   //     </div>'
   //   $.messager.alert('提示',msg);
   // }
+  
   // 直接通过id就能调用该dom
   $skyline_layout.layout('panel', 'west')
     .append('<object id="TerraExplorerInformationWindow" classid="CLSID:3a4f9193-65a8-11d5-85c1-0001023952c1" style="width: 100%;height: calc(100% - 5px);"></object>');
   $skyline_layout.layout('panel', 'center')
     .append('<object id="TerraExplorer3DWindow" classid="CLSID:3a4f9192-65a8-11d5-85c1-0001023952c1" style="width: 100%;height: calc(100% - 5px);"></object>');
   $('body').append('<object id="SGWorld" classid="CLSID:3a4f9197-65a8-11d5-85c1-0001023952c1" style="visibility:hidden;"></object>');
-  SGWorld.Open("C:\\wamp64\\www\\PipelineManagement\\Project\\Default.fly");
-  // SGWorld.AttachEvent("onLoadFinished", function(){
-  //   SGWorld.DateTime.DisplaySun = false; //关闭太阳
-  //   SGWorld.AttachEvent("onRButtonDown", function onRButtonDown(flags, x, y) {
-  //     return true;
-  //   }); //用于屏蔽右键
-  //   SGWorld.DetachEvent("onRButtonDown", onRButtonDown);//清除右键屏蔽
-  //   alert(SGWorld.ProjectTree.FindItem("辅助设施"))
-  //   $.messager.alert('提示','123');
-  // });
+  SGWorld.Open("C:\\skylinecpas\\Default.fly");
+
 }
 
-function execute(Code, Parameter, type, dom, other) {
+function execute(Code, Parameter) {
   if (SGWorld.Command.CanExecute(Code, Parameter) == false) {
-    alert("此工具当前不可用，请选择要素或图层！");
+    alert("此工具当前不可用");
   } else {
     SGWorld.Command.Execute(Code, Parameter);
-    
   }
 }
 
 /**
 按钮名：{
-  类型(type): 
+  类型 btn_type: 
     默认 imm(immediatly) 直接执行
     可选 toggle 开关
-      is_on 是否开启
-    可选 toggle_work_area 工作区开关
-    
-  是否可用(enable): 
-  执行的操作(exec): 
+    可选 toggle_group_work_area 工作区开关组
+    可选 toggle_group_pattern 模式开关组
+    可选 toggle_group_nav 导航开关组
+    可选 toggle_group_round 环绕开关组
+    可选 toggle_group_show 显示开关组
+    可选 toggle_group_mark 标注开关组
+  代号code: 
+  参数para: 
 }
 */
 var ribbon_btns = {
   "selectObj": {
-
-    "exex": "execute(1021,0)"
+    "exex": {
+      "code": "1021",
+      "para": "0"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "execute(1022,0)": {
-    "exex": "execute(1022,0)"
+    "exex": {
+      "code": "1022",
+      "para": "0"
+    }
   },
   "information": {
-    "exex": "execute(1023,0,'select','information')"
+    "exex": {
+      "code": "1023",
+      "para": "0"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "areaSelection": {
-    "exex": "execute(1024,0,'select','areaSelection')"
+    "exex": {
+      "code": "1024",
+      "para": "0"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "timeSlider": {
-    "exex": "execute(1065,4,'pressDown_Check','timeSlider')"
+    "exex": {
+      "code": "1065",
+      "para": "4"
+    },
+    "btn_type": "toggle"
   },
   "sun": {
-    "exex": "execute(1026,0,'pressDown_Check','sun')"
+    "exex": {
+      "code": "1026",
+      "para": "0"
+    },
+    "btn_type": "toggle"
   },
   "shadow": {
-    "exex": "execute(2118,0,'pressDown_Check','shadow')"
+    "exex": {
+      "code": "2118",
+      "para": "0"
+    },
+    "btn_type": "toggle"
   },
   "undergroundMode": {
-    "exex": "execute(1027,0,'pressDown_Check','undergroundMode')"
+    "exex": {
+      "code": "1027",
+      "para": "0"
+    },
+    "btn_type": "toggle"
   },
   "execute(1013,8)": {
-    "exex": "execute(1013,8)"
+    "exex": {
+      "code": "1013",
+      "para": "8"
+    },
+    "btn_type": "imm"
   },
   "execute(1014,2)": {
-    "exex": "execute(1014,2)"
+    "exex": {
+      "code": "1014",
+      "para": "2"
+    },
+    "btn_type": "imm"
   },
   "execute(1016,0)": {
-    "exex": "execute(1016,0)"
+    "exex": {
+      "code": "1016",
+      "para": "0"
+    },
+    "btn_type": "imm"
   },
   "execute(1017,0)": {
-    "exex": "execute(1017,0)"
+    "exex": {
+      "code": "1017",
+      "para": "0"
+    }
   },
   "execute(1018,0)": {
-    "exex": "execute(1018,0)"
+    "exex": {
+      "code": "1018",
+      "para": "0"
+    },
+    "btn_type": "imm"
   },
   "paste": {
-    "exex": "execute(1030,0)"
+    "exex": {
+      "code": "1030",
+      "para": "0"
+    },
+    "btn_type": "imm"
   },
   "execute(1031,0)": {
-    "exex": "execute(1031,0)"
+    "exex": {
+      "code": "1031",
+      "para": "0"
+    },
+    "btn_type": "imm"
   },
   "execute(1032,0)": {
-    "exex": "execute(1032,0)"
+    "exex": {
+      "code": "1032",
+      "para": "0"
+    },
+    "btn_type": "imm"
   },
   "execute(1033,0)": {
-    "exex": "execute(1033,0)"
+    "exex": {
+      "code": "1033",
+      "para": "0"
+    },
+    "btn_type": "imm"
   },
   "HorizontalMeasure": {
-    "exex": "execute(1034,0,'Measure','HorizontalMeasure')"
+    "exex": {
+      "code": "1034",
+      "para": "0"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "spaceMeasure": {
-    "exex": "execute(1035,0,'Measure','spaceMeasure')"
+    "exex": {
+      "code": "1035",
+      "para": "0"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "verticalDistance": {
-    "exex": "execute(1036,0,'Measure','verticalDistance')"
+    "exex": {
+      "code": "1036",
+      "para": "0"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "terrainArea": {
-    "exex": "execute(1165,0,'Measure','terrainArea')"
+    "exex": {
+      "code": "1165",
+      "para": "0"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "threeDArea": {
-    "exex": "execute(1037,0,'Measure','threeDArea')"
+    "exex": {
+      "code": "1037",
+      "para": "0"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "ContourMap": {
-    "exex": "createContourMap()"
+    "exex": {
+      "code": "createContourMap()",
+      "para": ""
+    },
+    "btn_type": "imm"
   },
   "SlopeAnalysis()": {
-    "exex": "SlopeAnalysis()"
+    "exex": {
+      "code": "SlopeAnalysis()",
+      "para": ""
+    },
+    "btn_type": "imm"
   },
   "execute(1042,0)": {
-    "exex": "execute(1042,0)"
+    "exex": {
+      "code": "1042",
+      "para": "0"
+    },
+    "btn_type": "imm"
   },
   "execute(1043,0)": {
-    "exex": "execute(1043,0)"
+    "exex": {
+      "code": "1043",
+      "para": "0"
+    },
+    "btn_type": "imm"
   },
   "execute(1044,0)": {
-    "exex": "execute(1044,0)"
+    "exex": {
+      "code": "1044",
+      "para": "0"
+    },
+    "btn_type": "imm"
   },
   "execute(1046,0)": {
-    "exex": "execute(1046,0)"
+    "exex": {
+      "code": "1046",
+      "para": "0"
+    },
+    "btn_type": "imm"
   },
   "execute(2117,0)": {
-    "exex": "execute(2117,0)"
+    "exex": {
+      "code": "2117",
+      "para": "0"
+    },
+    "btn_type": "imm"
   },
   "execute(1047,0)": {
-    "exex": "execute(1047,0)"
+    "exex": {
+      "code": "1047",
+      "para": "0"
+    },
+    "btn_type": "imm"
   },
   "collision": {
-    "exex": "execute(1140,0,'pressDown_Check','collision')"
+    "exex": {
+      "code": "1140",
+      "para": "0"
+    },
+    "btn_type": "toggle"
   },
   "dragMode": {
-    "exex": "execute(1049,0,'dragMode','dragMode')"
+    "exex": {
+      "code": "1049",
+      "para": "0"
+    },
+    "btn_type": "toggle_group_nav"
   },
   "Slide": {
-    "exex": "execute(1050,0,'Slide','Slide')"
+    "exex": {
+      "code": "1050",
+      "para": "0"
+    },
+    "btn_type": "toggle_group_nav"
   },
   "turn": {
-    "exex": "execute(1051,0,'turn','turn')"
+    "exex": {
+      "code": "1051",
+      "para": "0"
+    },
+    "btn_type": "toggle_group_nav"
   },
   "threeDMode": {
-    "exex": "execute(1052,0,'threeDMode','threeDMode')"
+    "exex": {
+      "code": "1052",
+      "para": "0"
+    },
+    "btn_type": "toggle_group_pattern"
   },
   "twoDMode": {
-    "exex": "execute(1053,0,'twoDMode','twoDMode')"
+    "exex": {
+      "code": "1053",
+      "para": "0"
+    },
+    "btn_type": "toggle_group_pattern"
   },
   "northMode": {
-    "exex": "execute(1054,0,'northMode','northMode')"
+    "exex": {
+      "code": "1054",
+      "para": "0"
+    },
+    "btn_type": "toggle_group_pattern"
   },
   "zoomBtn()": {
-    "exex": "zoomBtn()"
+    "exex": {
+      "code": "zoomBtn()",
+      "para": ""
+    },
+    "btn_type": "imm"
   },
   "execute(1056,0)": {
-    "exex": "execute(1056,0)"
+    "exex": {
+      "code": "1056",
+      "para": "0"
+    },
+    "btn_type": "imm"
   },
   "rotate": {
-    "exex": "execute(1057,0,'track','rotate')"
+    "exex": {
+      "code": "1057",
+      "para": "0"
+    },
+    "btn_type": "toggle_group_round"
   },
   "OvalRotate": {
-    "exex": "execute(1057,1,'track','OvalRotate')"
+    "exex": {
+      "code": "1057",
+      "para": "1"
+    },
+    "btn_type": "toggle_group_round"
   },
   "ArcPattern": {
-    "exex": "execute(1057,2,'track','ArcPattern')"
+    "exex": {
+      "code": "1057",
+      "para": "2"
+    },
+    "btn_type": "toggle_group_round"
   },
   "LinePattern": {
-    "exex": "execute(1057,3,'track','LinePattern')"
+    "exex": {
+      "code": "1057",
+      "para": "3"
+    },
+    "btn_type": "toggle_group_round"
   },
   "execute(1057,4)": {
-    "exex": "execute(1057,4)"
+    "exex": {
+      "code": "1057",
+      "para": "4"
+    },
+    "btn_type": "imm"
   },
   "execute(1057,5)": {
-    "exex": "execute(1057,5)"
+    "exex": {
+      "code": "1057",
+      "para": "5"
+    },
+    "btn_type": "imm"
   },
   "execute(1057,6)": {
-    "exex": "execute(1057,6)"
+    "exex": {
+      "code": "1057",
+      "para": "6"
+    },
+    "btn_type": "imm"
   },
   "execute(1057,7)": {
-    "exex": "execute(1057,7)"
+    "exex": {
+      "code": "1057",
+      "para": "7"
+    },
+    "btn_type": "imm"
   },
   "execute(1057,8)": {
-    "exex": "execute(1057,8)"
+    "exex": {
+      "code": "1057",
+      "para": "8"
+    },
+    "btn_type": "imm"
   },
   "execute(1057,9)": {
-    "exex": "execute(1057,9)"
+    "exex": {
+      "code": "1057",
+      "para": "9"
+    },
+    "btn_type": "imm"
   },
   "execute(1057,10)": {
-    "exex": "execute(1057,10)"
+    "exex": {
+      "code": "1057",
+      "para": "10"
+    },
+    "btn_type": "imm"
   },
   "execute(1057,11)": {
-    "exex": "execute(1057,11)"
+    "exex": {
+      "code": "1057",
+      "para": "11"
+    },
+    "btn_type": "imm"
   },
   "zoomIn()": {
-    "exex": "zoomIn()"
+    "exex": {
+      "code": "zoomIn()",
+      "para": ""
+    },
+    "btn_type": "imm"
   },
   "zoomOut()": {
-    "exex": "zoomOut()"
+    "exex": {
+      "code": "zoomOut()",
+      "para": ""
+    },
+    "btn_type": "imm"
   },
   "FullImage()": {
-    "exex": "FullImage()"
+    "exex": {
+      "code": "FullImage()",
+      "para": ""
+    },
+    "btn_type": "imm"
   },
   "zoomIn2DMap()": {
-    "exex": "zoomIn2DMap()"
+    "exex": {
+      "code": "zoomIn2DMap()",
+      "para": ""
+    },
+    "btn_type": "toggle"
   },
   "NavigationCtl": {
-    "exex": "execute(1065,0,'pressDown_Check','NavigationCtl')"
+    "exex": {
+      "code": "1065",
+      "para": "0"
+    },
+    "btn_type": "toggle"
   },
   "CenterSign": {
-    "exex": "execute(1065,1,'pressDown_Check','CenterSign')"
+    "exex": {
+      "code": "1065",
+      "para": "1"
+    },
+    "btn_type": "toggle"
   },
   "StatusBar": {
-    "exex": "execute(1065,2,'pressDown_Check','StatusBar')"
+    "exex": {
+      "code": "1065",
+      "para": "2"
+    },
+    "btn_type": "toggle"
   },
   "ScaleBar": {
-    "exex": "execute(1065,3,'pressDown_Check','ScaleBar')"
+    "exex": {
+      "code": "1065",
+      "para": "3"
+    },
+    "btn_type": "toggle"
   },
   "GraphicHUD": {
-    "exex": "execute(1065,5,'pressDown_Check','GraphicHUD')"
+    "exex": {
+      "code": "1065",
+      "para": "5"
+    },
+    "btn_type": "toggle"
   },
   "execute(1012,0)": {
-    "exex": "execute(1012,0)"
+    "exex": {
+      "code": "1012",
+      "para": "0"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "execute(1012,1)": {
-    "exex": "execute(1012,1)"
+    "exex": {
+      "code": "1012",
+      "para": "1"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "execute(1012,4)": {
-    "exex": "execute(1012,4)"
+    "exex": {
+      "code": "1012",
+      "para": "4"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "execute(1012,5)": {
-    "exex": "execute(1012,5)"
+    "exex": {
+      "code": "1012",
+      "para": "5"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "execute(1012,6)": {
-    "exex": "execute(1012,6)"
+    "exex": {
+      "code": "1012",
+      "para": "6"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "execute(1012,7)": {
-    "exex": "execute(1012,7)"
+    "exex": {
+      "code": "1012",
+      "para": "7"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "execute(1012,9)": {
-    "exex": "execute(1012,9)"
+    "exex": {
+      "code": "1012",
+      "para": "9"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "execute(1012,10)": {
-    "exex": "execute(1012,10)"
+    "exex": {
+      "code": "1012",
+      "para": "10"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "execute(1012,11)": {
-    "exex": "execute(1012,11)"
+    "exex": {
+      "code": "1012",
+      "para": "11"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "execute(1012,8)": {
-    "exex": "execute(1012,8)"
+    "exex": {
+      "code": "1012",
+      "para": "8"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "execute(1012,13)": {
-    "exex": "execute(1012,13)"
+    "exex": {
+      "code": "1012",
+      "para": "13"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "execute(1012,14)": {
-    "exex": "execute(1012,14)"
+    "exex": {
+      "code": "1012",
+      "para": "14"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "execute(1012,21)": {
-    "exex": "execute(1012,21)"
+    "exex": {
+      "code": "1012",
+      "para": "21"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "execute(1012,24)": {
-    "exex": "execute(1012,24)"
+    "exex": {
+      "code": "1012",
+      "para": "24"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "execute(1012,20)": {
-    "exex": "execute(1012,20)"
+    "exex": {
+      "code": "1012",
+      "para": "20"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "execute(1012,26)": {
-    "exex": "execute(1012,26)"
+    "exex": {
+      "code": "1012",
+      "para": "26"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "execute(1012,27)": {
-    "exex": "execute(1012,27)"
+    "exex": {
+      "code": "1012",
+      "para": "27"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "execute(1086,0)": {
-    "exex": "execute(1086,0)"
+    "exex": {
+      "code": "1086",
+      "para": "0"
+    }
   },
   "selectLayerF": {
-    "exex": "execute(1070,0,'selectElement','selectLayerF')"
+    "exex": {
+      "code": "1070",
+      "para": "0"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "aeraSelectF": {
-    "exex": "execute(1071,0,'selectElement','aeraSelectF')"
+    "exex": {
+      "code": "1071",
+      "para": "0"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "lineSelect": {
-    "exex": "execute(1072,0,'selectElement','lineSelect')"
+    "exex": {
+      "code": "1072",
+      "para": "0"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "pointSelect": {
-    "exex": "execute(1073,0,'selectElement','pointSelect')"
+    "exex": {
+      "code": "1073",
+      "para": "0"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "ObjSelect": {
-    "exex": "execute(1156,0,'selectElement','ObjSelect')"
+    "exex": {
+      "code": "1156",
+      "para": "0"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "createPresentation()": {
-    "exex": "createPresentation()"
+    "exex": {
+      "code": "createPresentation()",
+      "para": ""
+    },
+    "btn_type": "imm"
   },
   "Presentation(1099,0)": {
-    "exex": "Presentation(1099,0)"
+    "exex": {
+      "code": "1099",
+      "para": "0"
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "Presentation(1101,0,this)": {
-    "exex": "Presentation(1101,0,this)"
+    "exex": {
+      "code": "1101",
+      "para": "0"
+    },
+    "btn_type": "toggle"
   },
   "Presentation(1102,0)": {
-    "exex": "Presentation(1102,0)"
+    "exex": {
+      "code": "1102",
+      "para": "0"
+    },
+    "btn_type": "imm"
   },
   "Presentation(1111,0)": {
-    "exex": "Presentation(1111,0)"
+    "exex": {
+      "code": "1111",
+      "para": "0"
+    },
+    "btn_type": "imm"
   },
   "Presentation(1112,0)": {
-    "exex": "Presentation(1112,0)"
+    "exex": {
+      "code": "1112",
+      "para": "0"
+    },
+    "btn_type": "imm"
   },
   "Presentation(1116,0)": {
-    "exex": "Presentation(1116,0)"
+    "exex": {
+      "code": "1116",
+      "para": "0"
+    },
+    "btn_type": "imm"
   },
   "execute(1067,0)": {
-    "exex": "execute(1067,0)"
+    "exex": {
+      "code": "1067",
+      "para": "0"
+    },
+    "btn_type": "imm"
   },
   "excavation()": {
-    "exex": "excavation()"
+    "exex": {
+      "code": "excavation()",
+      "para": ""
+    },
+    "btn_type": "toggle_group_work_area"
   },
   "showAllObj()": {
-    "exex": "showAllObj()"
+    "exex": {
+      "code": "showAllObj()",
+      "para": ""
+    },
+    "btn_type": "toggle_group_show"
   },
   "hiddenAllObj()": {
-    "exex": "hiddenAllObj()"
+    "exex": {
+      "code": "hiddenAllObj()",
+      "para": ""
+    },
+    "btn_type": "toggle_group_show"
   },
   "showPipeline()": {
-    "exex": "showPipeline()"
+    "exex": {
+      "code": "showPipeline()",
+      "para": ""
+    },
+    "btn_type": "toggle_group_show"
   },
   "heightLabel": {
-    "exex": "heightMark()"
+    "exex": {
+      "code": "heightMark()",
+      "para": ""
+    },
+    "btn_type": "toggle_group_mark"
   },
   "coordLabel": {
-    "exex": "coordLabel()"
+    "exex": {
+      "code": "coordLabel()",
+      "para": ""
+    },
+    "btn_type": "toggle_group_mark"
   },
   "SlopeLable": {
-    "exex": "SlopeLable()"
+    "exex": {
+      "code": "SlopeLable()",
+      "para": ""
+    },
+    "btn_type": "toggle_group_mark"
   },
   "clearLabel()": {
-    "exex": "clearLabel()"
+    "exex": {
+      "code": "clearLabel()",
+      "para": ""
+    },
+    "btn_type": "imm"
   }
 };
 
-// 挂到window上，不然找不到
+
 var ribbon_data = {
   selected: 0, //默认第几个是选择的
   tabs: [
@@ -364,7 +751,9 @@ var ribbon_data = {
               "text": "选择",
               "iconCls": "icon-choose icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             },
             {
               "type": "toolbar",
@@ -373,17 +762,22 @@ var ribbon_data = {
                 {
                   "name": "execute(1022,0)",
                   "text": "属性",
-                  "iconCls": "icon-attribute icon-small"
+                  "iconCls": "icon-attribute icon-small",
+                  "btn_type": "toggle",
                 },
                 {
                   "name": "information",
                   "text": "信息",
-                  "iconCls": "icon-information icon-small"
+                  "iconCls": "icon-information icon-small",
+                  "btn_type": "toggle_group_work_area",
+                  "group": "work_area",
                 },
                 {
                   "name": "areaSelection",
                   "text": "区域选择",
-                  "iconCls": "icon-area icon-small"
+                  "iconCls": "icon-area icon-small",
+                  "btn_type": "toggle_group_work_area",
+                  "group": "work_area",
                 }
               ]
             }
@@ -397,14 +791,16 @@ var ribbon_data = {
               "text": "时间滑块",
               "iconCls": "icon-time icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle",
             },
             {
               "name": "sun",
               "text": "太阳",
               "iconCls": "icon-sun icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle",
             }
           ]
         },
@@ -416,14 +812,16 @@ var ribbon_data = {
               "text": "阴影",
               "iconCls": "icon-shadow icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle",
             },
             {
               "name": "undergroundMode",
               "text": "地下模式",
               "iconCls": "icon-underground icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle",
             }
           ]
         },
@@ -435,35 +833,32 @@ var ribbon_data = {
               "text": "特征图层",
               "iconCls": "icon-layer icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm",
             },
             {
               "name": "execute(1014,2)",
               "text": "栅格图层",
               "iconCls": "icon-grid icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm",
             },
             {
               "name": "execute(1016,0)",
               "text": "兴趣点",
               "iconCls": "icon-savorPoint icon-large",
               "iconAlign": "top",
-              "size": "large"
-            },
-            {
-              "name": "execute(1017,0)",
-              "text": "树信息",
-              "iconCls": "icon-treeInformation icon-large",
-              "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm",
             },
             {
               "name": "execute(1018,0)",
               "text": "创建组",
               "iconCls": "icon-group icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm",
             }
           ]
         },
@@ -475,7 +870,8 @@ var ribbon_data = {
               "text": "粘贴",
               "iconCls": "icon-paste icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm",
             },
             {
               "type": "toolbar",
@@ -484,17 +880,20 @@ var ribbon_data = {
                 {
                   "name": "execute(1031,0)",
                   "text": "复制",
-                  "iconCls": "icon-copy icon-small"
+                  "iconCls": "icon-copy icon-small",
+                  "btn_type": "imm",
                 },
                 {
                   "name": "execute(1032,0)",
                   "text": "剪切",
-                  "iconCls": "icon-shear icon-small"
+                  "iconCls": "icon-shear icon-small",
+                  "btn_type": "imm",
                 },
                 {
                   "name": "execute(1033,0)",
                   "text": "删除",
-                  "iconCls": "icon-delete icon-small"
+                  "iconCls": "icon-delete icon-small",
+                  "btn_type": "imm",
                 }
               ]
             }
@@ -513,35 +912,45 @@ var ribbon_data = {
               "text": "水平距离",
               "iconCls": "icon-horizontal icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             },
             {
               "name": "spaceMeasure",
               "text": "空间距离",
               "iconCls": "icon-space icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             },
             {
               "name": "verticalDistance",
               "text": "垂直距离",
               "iconCls": "icon-vertical icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             },
             {
               "name": "terrainArea",
               "text": "地形面积",
               "iconCls": "icon-area icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             },
             {
               "name": "threeDArea",
               "text": "3D面积",
               "iconCls": "icon-threeDarea icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             }
           ]
         },
@@ -553,35 +962,40 @@ var ribbon_data = {
               "text": "等高线图",
               "iconCls": "icon-denggao icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm"
             },
             {
               "name": "SlopeAnalysis()",
               "text": "坡度分析",
               "iconCls": "icon-Slope icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm"
             },
             {
               "name": "execute(1042,0)",
               "text": "路径分析",
               "iconCls": "icon-path icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm"
             },
             {
               "name": "execute(1043,0)",
               "text": "剖面分析",
               "iconCls": "icon-poumian icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm"
             },
             {
               "name": "execute(1044,0)",
               "text": "淹没分析",
               "iconCls": "icon-yanmofenxi icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm"
             }
           ]
         },
@@ -593,21 +1007,24 @@ var ribbon_data = {
               "text": "视线分析",
               "iconCls": "icon-sight icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm"
             },
             {
               "name": "execute(2117,0)",
               "text": "3D视域",
               "iconCls": "icon-threeD icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm"
             },
             {
               "name": "execute(1047,0)",
               "text": "视域分析",
               "iconCls": "icon-perspective icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm"
             }
           ]
         },
@@ -619,7 +1036,8 @@ var ribbon_data = {
               "text": "碰撞检测",
               "iconCls": "icon-pengzhuang icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle"
             }
           ]
         }
@@ -636,21 +1054,27 @@ var ribbon_data = {
               "text": "拖动模式",
               "iconCls": "icon-drag icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_nav",
+              "group": "nav"
             },
             {
               "name": "Slide",
               "text": "滑动模式",
               "iconCls": "icon-huadong icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_nav",
+              "group": "nav"
             },
             {
               "name": "turn",
               "text": "转弯模式",
               "iconCls": "icon-zhuangwan icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_nav",
+              "group": "nav"
             }
           ]
         },
@@ -662,21 +1086,27 @@ var ribbon_data = {
               "text": "3D导航",
               "iconCls": "icon-threeD_ icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_pattern",
+              "group": "pattern"
             },
             {
               "name": "twoDMode",
               "text": "2D导航",
               "iconCls": "icon-twoD icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_pattern",
+              "group": "pattern"
             },
             {
               "name": "northMode",
               "text": "指北导航",
               "iconCls": "icon-zhibeidaohang icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_pattern",
+              "group": "pattern"
             }
           ]
         },
@@ -688,14 +1118,16 @@ var ribbon_data = {
               "text": "缩放",
               "iconCls": "icon-suofang icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm"
             },
             {
               "name": "execute(1056,0)",
-              "text": "指北针",
+              "text": "北",
               "iconCls": "icon-zhibeizhen icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm"
             }
           ]
         },
@@ -707,7 +1139,9 @@ var ribbon_data = {
               "text": "环绕模式",
               "iconCls": "icon-huanrao icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_round",
+              "group": "round"
             },
             {
               "type": "toolbar",
@@ -716,17 +1150,23 @@ var ribbon_data = {
                 {
                   "name": "OvalRotate",
                   "text": "椭圆环绕",
-                  "iconCls": "icon-tuoyuan icon-small"
+                  "iconCls": "icon-tuoyuan icon-small",
+                  "btn_type": "toggle_group_round",
+                  "group": "round"
                 },
                 {
                   "name": "ArcPattern",
                   "text": "弧形环绕",
-                  "iconCls": "icon-Arc icon-small"
+                  "iconCls": "icon-Arc icon-small",
+                  "btn_type": "toggle_group_round",
+                  "group": "round"
                 },
                 {
                   "name": "LinePattern",
                   "text": "直线模式",
-                  "iconCls": "icon-line icon-small"
+                  "iconCls": "icon-line icon-small",
+                  "btn_type": "toggle_group_round",
+                  "group": "round"
                 }
               ]
             }
@@ -740,56 +1180,64 @@ var ribbon_data = {
               "text": "对象后方",
               "iconCls": "icon-houmian icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm"
             },
             {
               "name": "execute(1057,5)",
               "text": "对象上方",
               "iconCls": "icon-up icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm"
             },
             {
               "name": "execute(1057,6)",
               "text": "对象下方",
               "iconCls": "icon-down icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm"
             },
             {
               "name": "execute(1057,7)",
               "text": "对象右侧",
               "iconCls": "icon-right icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm"
             },
             {
               "name": "execute(1057,8)",
               "text": "对象左侧",
               "iconCls": "icon-left icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm"
             },
             {
               "name": "execute(1057,9)",
               "text": "从后上方",
               "iconCls": "icon-houshang icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm"
             },
             {
               "name": "execute(1057,10)",
               "text": "驾驶视角",
               "iconCls": "icon-jiashi icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm"
             },
             {
               "name": "execute(1057,11)",
               "text": "地面视点",
               "iconCls": "icon-dimain icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm"
             }
           ]
         }
@@ -806,28 +1254,32 @@ var ribbon_data = {
               "text": "放大",
               "iconCls": "icon-zoomIn icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm"
             },
             {
               "name": "zoomOut()",
               "text": "缩小",
               "iconCls": "icon-zoomOut icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm"
             },
             {
               "name": "FullImage()",
               "text": "全图",
               "iconCls": "icon-all icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm"
             },
             {
               "name": "zoomIn2DMap()",
               "text": "鹰眼",
               "iconCls": "icon-Eye icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle"
             }
           ]
         },
@@ -839,35 +1291,40 @@ var ribbon_data = {
               "text": "导航控件",
               "iconCls": "icon-kongjian icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle"
             },
             {
               "name": "CenterSign",
               "text": "中心十字",
               "iconCls": "icon-shizi icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle"
             },
             {
               "name": "StatusBar",
               "text": "状态栏",
               "iconCls": "icon-zhuangtai icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle"
             },
             {
               "name": "ScaleBar",
               "text": "比例尺",
               "iconCls": "icon-bili icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle"
             },
             {
               "name": "GraphicHUD",
               "text": "图形HUD",
               "iconCls": "icon-hud icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle"
             }
           ]
         }
@@ -884,14 +1341,18 @@ var ribbon_data = {
               "text": "文本",
               "iconCls": "icon-wenben icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             },
             {
               "name": "execute(1012,1)",
               "text": "图片",
               "iconCls": "icon-tupian icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             }
           ]
         },
@@ -903,56 +1364,72 @@ var ribbon_data = {
               "text": "折线",
               "iconCls": "icon-zhexian icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             },
             {
               "name": "execute(1012,5)",
               "text": "多边形",
               "iconCls": "icon-duobianxing icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             },
             {
               "name": "execute(1012,6)",
               "text": "矩形",
               "iconCls": "icon-juxing icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             },
             {
               "name": "execute(1012,7)",
               "text": "正多边形",
               "iconCls": "icon-zhengduobian icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             },
             {
               "name": "execute(1012,9)",
               "text": "圆形",
               "iconCls": "icon-yuan icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             },
             {
               "name": "execute(1012,10)",
               "text": "椭圆",
               "iconCls": "icon-tuoyuan icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             },
             {
               "name": "execute(1012,11)",
               "text": "弧形",
               "iconCls": "icon-hu icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             },
             {
               "name": "execute(1012,8)",
               "text": "2D箭头",
               "iconCls": "icon-jiantou icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             }
           ]
         },
@@ -964,35 +1441,45 @@ var ribbon_data = {
               "text": "三维模型",
               "iconCls": "icon-sanweimoxing icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             },
             {
               "name": "execute(1012,14)",
               "text": "建筑物",
               "iconCls": "icon-object icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             },
             {
               "name": "execute(1012,21)",
               "text": "球体",
               "iconCls": "icon-qiu icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             },
             {
               "name": "execute(1012,24)",
               "text": "三维箭头",
               "iconCls": "icon-sanweijiantou icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             },
             {
               "name": "execute(1012,20)",
               "text": "圆柱体",
               "iconCls": "icon-yuanzhu icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             }
           ]
         },
@@ -1004,14 +1491,18 @@ var ribbon_data = {
               "text": "地面对象",
               "iconCls": "icon-dimian icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             },
             {
               "name": "execute(1012,27)",
               "text": "空中对象",
               "iconCls": "icon-kongzhong icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             }
           ]
         }
@@ -1047,35 +1538,45 @@ var ribbon_data = {
               "text": "选择",
               "iconCls": "icon-choose icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             },
             {
               "name": "aeraSelectF",
               "text": "区域选择",
               "iconCls": "icon-area icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             },
             {
               "name": "lineSelect",
               "text": "画线选择",
               "iconCls": "icon-line icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             },
             {
               "name": "pointSelect",
               "text": "画点选择",
               "iconCls": "icon-huapoint icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             },
             {
               "name": "ObjSelect",
               "text": "对象选择",
               "iconCls": "icon-objectC icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             }
           ]
         }
@@ -1092,7 +1593,8 @@ var ribbon_data = {
               "text": "新建演示",
               "iconCls": "icon-chuangjianyanshi icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm"
             }
           ]
         },
@@ -1104,14 +1606,17 @@ var ribbon_data = {
               "text": "加兴趣点",
               "iconCls": "icon-jiaxingqudian icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             },
             {
               "name": "Presentation(1101,0,this)",
               "text": "记录轨迹",
               "iconCls": "icon-jiluguiji icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle",
             }
           ]
         },
@@ -1123,14 +1628,16 @@ var ribbon_data = {
               "text": "添加标题",
               "iconCls": "icon-tianjiabiaoti icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm",
             },
             {
               "name": "Presentation(1111,0)",
               "text": "编辑工具",
               "iconCls": "icon-bianjigongju icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm",
             }
           ]
         },
@@ -1142,7 +1649,8 @@ var ribbon_data = {
               "text": "播放",
               "iconCls": "icon-bofang icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm",
             },
             {
               "type": "toolbar",
@@ -1172,7 +1680,8 @@ var ribbon_data = {
               "text": "创建视频",
               "iconCls": "icon-chuangjianshipin1 icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm",
             },
             {
               "type": "toolbar",
@@ -1207,14 +1716,17 @@ var ribbon_data = {
               "text": "地图截图",
               "iconCls": "icon-ditijietu icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm",
             },
             {
               "name": "excavation()",
               "text": "地形开挖",
               "iconCls": "icon-dixingkaiwa icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_work_area",
+              "group": "work_area",
             }
           ]
         },
@@ -1226,21 +1738,27 @@ var ribbon_data = {
               "text": "全部显示",
               "iconCls": "icon-xianshiquanbu icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_show",
+              "group": "show",
             },
             {
               "name": "hiddenAllObj()",
               "text": "全部隐藏",
               "iconCls": "icon-yinchangquanbu icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_show",
+              "group": "show",
             },
             {
               "name": "showPipeline()",
               "text": "只看管线",
               "iconCls": "icon-zhikan icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_show",
+              "group": "show",
             }
           ]
         },
@@ -1252,28 +1770,35 @@ var ribbon_data = {
               "text": "高度标注",
               "iconCls": "icon-choose icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_mark",
+              "group": "mark",
             },
             {
               "name": "coordLabel",
               "text": "坐标标注",
               "iconCls": "icon-area icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_mark",
+              "group": "mark",
             },
             {
               "name": "SlopeLable",
               "text": "坡度标注",
               "iconCls": "icon-objectC icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "toggle_group_mark",
+              "group": "mark",
             },
             {
               "name": "clearLabel()",
               "text": "清除标注",
               "iconCls": "icon-close icon-large",
               "iconAlign": "top",
-              "size": "large"
+              "size": "large",
+              "btn_type": "imm"
             }
           ]
         }
@@ -1281,6 +1806,49 @@ var ribbon_data = {
     }
   ]
 };
+
+function ribbon_click(name, target){
+  var $SR = window.$SR;
+  var btn = $SR.btns[name];
+  var type = btn.btn_type;
+  var selected = $(target).hasClass('l-btn-selected');
+  var disabled = $(target).hasClass('l-btn-disabled');
+  console.log(btn, selected, disabled);
+  if (disabled) return
+  switch(type){
+    case 'imm':
+      execute(btn.code, btn.para);
+      break
+    case 'toggle':
+      if(!selected){
+        $(target).addClass('l-btn-selected');
+      }else{
+        $(target).removeClass('l-btn-selected');
+      }
+      execute(btn.code, btn.para);
+      break
+    case 'toggle_group_work_area':
+      if(!selected){
+        $SR.find("[group='work_area']").removeClass('l-btn-selected');
+        $(target).addClass('l-btn-selected');
+      }else{
+        $(target).removeClass('l-btn-selected');
+      }
+      execute(btn.code, btn.para);
+      break
+    default:
+      if (type.substr(0, 13) == 'toggle_group_') {
+        if(!selected){
+          $SR.find("[group='" + type.substr(13) + "']").removeClass('l-btn-selected');
+          $(target).addClass('l-btn-selected');
+        }else{
+          return
+        }
+        execute(btn.code, btn.para);
+      }
+      break
+  }
+}
 
 function load_ribbon($skyline_ribbon){
   // 使用ribbon_data，ribbon_btns
@@ -1310,13 +1878,11 @@ function load_ribbon($skyline_ribbon){
   ////////////////////////////////
   $.parser.plugins.push('label');
   var ribbon = $skyline_ribbon.ribbon({
-      data: ribbon_data,
-      onClick: function(name, target){
-        // 点击了工具
-        // alert(name);
-        console.log(name, target);
-        // eval(name);
-      }
+    data: ribbon_data,
+    onClick: function(name, target){
+      console.log(name, target);
+      ribbon_click(name, target);
+    }
   }).tabs({
     onSelect: function(title, index){
       // 选择了tab（从0开始）
