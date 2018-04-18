@@ -8,7 +8,7 @@ export default function($skyline_ribbon){
   // 给jquery easyui拓展label
   $.fn.label = function(options){
     if (typeof options == 'object'){
-      this.css({
+      this.css($.extend({
         'float': 'left',
         'color': '#444',
         'padding': '1px',
@@ -22,7 +22,7 @@ export default function($skyline_ribbon){
         'vertical-align': 'middle',
         'font-size': '12px',
         'line-height': '24px'
-      })
+      }, options.css))
       this.append(options.text)
     }
   };

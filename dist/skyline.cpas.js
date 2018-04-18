@@ -21,6 +21,7 @@ function load_fly($skyline_layout){
 }
 
 function execute(Code, Parameter) {
+  console.log('exec', Code, Parameter, SGWorld.Command.CanExecute(Code, Parameter));
   if (SGWorld.Command.CanExecute(Code, Parameter) == false) {
     alert("此工具当前不可用");
   } else {
@@ -45,695 +46,752 @@ function execute(Code, Parameter) {
 */
 var ribbon_btns = {
   "selectObj": {
-    "exex": {
+    "exec": {
       "code": "1021",
       "para": "0"
     },
     "btn_type": "toggle_group_work_area"
   },
   "execute(1022,0)": {
-    "exex": {
+    "exec": {
       "code": "1022",
       "para": "0"
-    }
+    },
+    "btn_type": "toggle"
   },
   "information": {
-    "exex": {
+    "exec": {
       "code": "1023",
       "para": "0"
     },
-    "btn_type": "toggle_group_work_area"
+    "btn_type": "toggle"
   },
   "areaSelection": {
-    "exex": {
+    "exec": {
       "code": "1024",
       "para": "0"
     },
     "btn_type": "toggle_group_work_area"
   },
   "timeSlider": {
-    "exex": {
+    "exec": {
       "code": "1065",
       "para": "4"
     },
     "btn_type": "toggle"
   },
   "sun": {
-    "exex": {
+    "exec": {
       "code": "1026",
       "para": "0"
     },
     "btn_type": "toggle"
   },
   "shadow": {
-    "exex": {
+    "exec": {
       "code": "2118",
       "para": "0"
     },
     "btn_type": "toggle"
   },
   "undergroundMode": {
-    "exex": {
+    "exec": {
       "code": "1027",
       "para": "0"
     },
     "btn_type": "toggle"
   },
   "execute(1013,8)": {
-    "exex": {
+    "exec": {
       "code": "1013",
       "para": "8"
     },
     "btn_type": "imm"
   },
   "execute(1014,2)": {
-    "exex": {
+    "exec": {
       "code": "1014",
       "para": "2"
     },
     "btn_type": "imm"
   },
   "execute(1016,0)": {
-    "exex": {
+    "exec": {
       "code": "1016",
       "para": "0"
     },
     "btn_type": "imm"
   },
   "execute(1017,0)": {
-    "exex": {
+    "exec": {
       "code": "1017",
       "para": "0"
     }
   },
   "execute(1018,0)": {
-    "exex": {
+    "exec": {
       "code": "1018",
       "para": "0"
     },
     "btn_type": "imm"
   },
   "paste": {
-    "exex": {
+    "exec": {
       "code": "1030",
       "para": "0"
     },
     "btn_type": "imm"
   },
   "execute(1031,0)": {
-    "exex": {
+    "exec": {
       "code": "1031",
       "para": "0"
     },
     "btn_type": "imm"
   },
   "execute(1032,0)": {
-    "exex": {
+    "exec": {
       "code": "1032",
       "para": "0"
     },
     "btn_type": "imm"
   },
   "execute(1033,0)": {
-    "exex": {
+    "exec": {
       "code": "1033",
       "para": "0"
     },
     "btn_type": "imm"
   },
   "HorizontalMeasure": {
-    "exex": {
+    "exec": {
       "code": "1034",
       "para": "0"
     },
     "btn_type": "toggle_group_work_area"
   },
   "spaceMeasure": {
-    "exex": {
+    "exec": {
       "code": "1035",
       "para": "0"
     },
     "btn_type": "toggle_group_work_area"
   },
   "verticalDistance": {
-    "exex": {
+    "exec": {
       "code": "1036",
       "para": "0"
     },
     "btn_type": "toggle_group_work_area"
   },
   "terrainArea": {
-    "exex": {
+    "exec": {
       "code": "1165",
       "para": "0"
     },
     "btn_type": "toggle_group_work_area"
   },
   "threeDArea": {
-    "exex": {
+    "exec": {
       "code": "1037",
       "para": "0"
     },
     "btn_type": "toggle_group_work_area"
   },
   "ContourMap": {
-    "exex": {
+    "exec": {
       "code": "createContourMap()",
       "para": ""
     },
     "btn_type": "imm"
   },
   "SlopeAnalysis()": {
-    "exex": {
+    "exec": {
       "code": "SlopeAnalysis()",
       "para": ""
     },
     "btn_type": "imm"
   },
   "execute(1042,0)": {
-    "exex": {
+    "exec": {
       "code": "1042",
       "para": "0"
     },
     "btn_type": "imm"
   },
   "execute(1043,0)": {
-    "exex": {
+    "exec": {
       "code": "1043",
       "para": "0"
     },
     "btn_type": "imm"
   },
   "execute(1044,0)": {
-    "exex": {
+    "exec": {
       "code": "1044",
       "para": "0"
     },
     "btn_type": "imm"
   },
   "execute(1046,0)": {
-    "exex": {
+    "exec": {
       "code": "1046",
       "para": "0"
     },
     "btn_type": "imm"
   },
   "execute(2117,0)": {
-    "exex": {
+    "exec": {
       "code": "2117",
       "para": "0"
     },
     "btn_type": "imm"
   },
   "execute(1047,0)": {
-    "exex": {
+    "exec": {
       "code": "1047",
       "para": "0"
     },
     "btn_type": "imm"
   },
   "collision": {
-    "exex": {
+    "exec": {
       "code": "1140",
       "para": "0"
     },
     "btn_type": "toggle"
   },
   "dragMode": {
-    "exex": {
+    "exec": {
       "code": "1049",
       "para": "0"
     },
     "btn_type": "toggle_group_nav"
   },
   "Slide": {
-    "exex": {
+    "exec": {
       "code": "1050",
       "para": "0"
     },
     "btn_type": "toggle_group_nav"
   },
   "turn": {
-    "exex": {
+    "exec": {
       "code": "1051",
       "para": "0"
     },
     "btn_type": "toggle_group_nav"
   },
   "threeDMode": {
-    "exex": {
+    "exec": {
       "code": "1052",
       "para": "0"
     },
     "btn_type": "toggle_group_pattern"
   },
   "twoDMode": {
-    "exex": {
+    "exec": {
       "code": "1053",
       "para": "0"
     },
     "btn_type": "toggle_group_pattern"
   },
   "northMode": {
-    "exex": {
+    "exec": {
       "code": "1054",
       "para": "0"
     },
     "btn_type": "toggle_group_pattern"
   },
   "zoomBtn()": {
-    "exex": {
+    "exec": {
       "code": "zoomBtn()",
       "para": ""
     },
     "btn_type": "imm"
   },
   "execute(1056,0)": {
-    "exex": {
+    "exec": {
       "code": "1056",
       "para": "0"
     },
     "btn_type": "imm"
   },
   "rotate": {
-    "exex": {
+    "exec": {
       "code": "1057",
       "para": "0"
     },
     "btn_type": "toggle_group_round"
   },
   "OvalRotate": {
-    "exex": {
+    "exec": {
       "code": "1057",
       "para": "1"
     },
     "btn_type": "toggle_group_round"
   },
   "ArcPattern": {
-    "exex": {
+    "exec": {
       "code": "1057",
       "para": "2"
     },
     "btn_type": "toggle_group_round"
   },
   "LinePattern": {
-    "exex": {
+    "exec": {
       "code": "1057",
       "para": "3"
     },
     "btn_type": "toggle_group_round"
   },
   "execute(1057,4)": {
-    "exex": {
+    "exec": {
       "code": "1057",
       "para": "4"
     },
     "btn_type": "imm"
   },
   "execute(1057,5)": {
-    "exex": {
+    "exec": {
       "code": "1057",
       "para": "5"
     },
     "btn_type": "imm"
   },
   "execute(1057,6)": {
-    "exex": {
+    "exec": {
       "code": "1057",
       "para": "6"
     },
     "btn_type": "imm"
   },
   "execute(1057,7)": {
-    "exex": {
+    "exec": {
       "code": "1057",
       "para": "7"
     },
     "btn_type": "imm"
   },
   "execute(1057,8)": {
-    "exex": {
+    "exec": {
       "code": "1057",
       "para": "8"
     },
     "btn_type": "imm"
   },
   "execute(1057,9)": {
-    "exex": {
+    "exec": {
       "code": "1057",
       "para": "9"
     },
     "btn_type": "imm"
   },
   "execute(1057,10)": {
-    "exex": {
+    "exec": {
       "code": "1057",
       "para": "10"
     },
     "btn_type": "imm"
   },
   "execute(1057,11)": {
-    "exex": {
+    "exec": {
       "code": "1057",
       "para": "11"
     },
     "btn_type": "imm"
   },
   "zoomIn()": {
-    "exex": {
+    "exec": {
       "code": "zoomIn()",
       "para": ""
     },
     "btn_type": "imm"
   },
   "zoomOut()": {
-    "exex": {
+    "exec": {
       "code": "zoomOut()",
       "para": ""
     },
     "btn_type": "imm"
   },
   "FullImage()": {
-    "exex": {
+    "exec": {
       "code": "FullImage()",
       "para": ""
     },
     "btn_type": "imm"
   },
   "zoomIn2DMap()": {
-    "exex": {
+    "exec": {
       "code": "zoomIn2DMap()",
       "para": ""
     },
     "btn_type": "toggle"
   },
   "NavigationCtl": {
-    "exex": {
+    "exec": {
       "code": "1065",
       "para": "0"
     },
     "btn_type": "toggle"
   },
   "CenterSign": {
-    "exex": {
+    "exec": {
       "code": "1065",
       "para": "1"
     },
     "btn_type": "toggle"
   },
   "StatusBar": {
-    "exex": {
+    "exec": {
       "code": "1065",
       "para": "2"
     },
     "btn_type": "toggle"
   },
   "ScaleBar": {
-    "exex": {
+    "exec": {
       "code": "1065",
       "para": "3"
     },
     "btn_type": "toggle"
   },
   "GraphicHUD": {
-    "exex": {
+    "exec": {
       "code": "1065",
       "para": "5"
     },
     "btn_type": "toggle"
   },
   "execute(1012,0)": {
-    "exex": {
+    "exec": {
       "code": "1012",
       "para": "0"
     },
     "btn_type": "toggle_group_work_area"
   },
   "execute(1012,1)": {
-    "exex": {
+    "exec": {
       "code": "1012",
       "para": "1"
     },
     "btn_type": "toggle_group_work_area"
   },
   "execute(1012,4)": {
-    "exex": {
+    "exec": {
       "code": "1012",
       "para": "4"
     },
     "btn_type": "toggle_group_work_area"
   },
   "execute(1012,5)": {
-    "exex": {
+    "exec": {
       "code": "1012",
       "para": "5"
     },
     "btn_type": "toggle_group_work_area"
   },
   "execute(1012,6)": {
-    "exex": {
+    "exec": {
       "code": "1012",
       "para": "6"
     },
     "btn_type": "toggle_group_work_area"
   },
   "execute(1012,7)": {
-    "exex": {
+    "exec": {
       "code": "1012",
       "para": "7"
     },
     "btn_type": "toggle_group_work_area"
   },
   "execute(1012,9)": {
-    "exex": {
+    "exec": {
       "code": "1012",
       "para": "9"
     },
     "btn_type": "toggle_group_work_area"
   },
   "execute(1012,10)": {
-    "exex": {
+    "exec": {
       "code": "1012",
       "para": "10"
     },
     "btn_type": "toggle_group_work_area"
   },
   "execute(1012,11)": {
-    "exex": {
+    "exec": {
       "code": "1012",
       "para": "11"
     },
     "btn_type": "toggle_group_work_area"
   },
   "execute(1012,8)": {
-    "exex": {
+    "exec": {
       "code": "1012",
       "para": "8"
     },
     "btn_type": "toggle_group_work_area"
   },
   "execute(1012,13)": {
-    "exex": {
+    "exec": {
       "code": "1012",
       "para": "13"
     },
     "btn_type": "toggle_group_work_area"
   },
   "execute(1012,14)": {
-    "exex": {
+    "exec": {
       "code": "1012",
       "para": "14"
     },
     "btn_type": "toggle_group_work_area"
   },
   "execute(1012,21)": {
-    "exex": {
+    "exec": {
       "code": "1012",
       "para": "21"
     },
     "btn_type": "toggle_group_work_area"
   },
   "execute(1012,24)": {
-    "exex": {
+    "exec": {
       "code": "1012",
       "para": "24"
     },
     "btn_type": "toggle_group_work_area"
   },
   "execute(1012,20)": {
-    "exex": {
+    "exec": {
       "code": "1012",
       "para": "20"
     },
     "btn_type": "toggle_group_work_area"
   },
   "execute(1012,26)": {
-    "exex": {
+    "exec": {
       "code": "1012",
       "para": "26"
     },
     "btn_type": "toggle_group_work_area"
   },
   "execute(1012,27)": {
-    "exex": {
+    "exec": {
       "code": "1012",
       "para": "27"
     },
     "btn_type": "toggle_group_work_area"
   },
   "execute(1086,0)": {
-    "exex": {
+    "exec": {
       "code": "1086",
       "para": "0"
     }
   },
   "selectLayerF": {
-    "exex": {
+    "exec": {
       "code": "1070",
       "para": "0"
     },
     "btn_type": "toggle_group_work_area"
   },
   "aeraSelectF": {
-    "exex": {
+    "exec": {
       "code": "1071",
       "para": "0"
     },
     "btn_type": "toggle_group_work_area"
   },
   "lineSelect": {
-    "exex": {
+    "exec": {
       "code": "1072",
       "para": "0"
     },
     "btn_type": "toggle_group_work_area"
   },
   "pointSelect": {
-    "exex": {
+    "exec": {
       "code": "1073",
       "para": "0"
     },
     "btn_type": "toggle_group_work_area"
   },
   "ObjSelect": {
-    "exex": {
+    "exec": {
       "code": "1156",
       "para": "0"
     },
     "btn_type": "toggle_group_work_area"
   },
   "createPresentation()": {
-    "exex": {
+    "exec": {
       "code": "createPresentation()",
       "para": ""
     },
     "btn_type": "imm"
   },
   "Presentation(1099,0)": {
-    "exex": {
+    "exec": {
       "code": "1099",
       "para": "0"
     },
     "btn_type": "toggle_group_work_area"
   },
   "Presentation(1101,0,this)": {
-    "exex": {
+    "exec": {
       "code": "1101",
       "para": "0"
     },
     "btn_type": "toggle"
   },
   "Presentation(1102,0)": {
-    "exex": {
+    "exec": {
       "code": "1102",
       "para": "0"
     },
     "btn_type": "imm"
   },
   "Presentation(1111,0)": {
-    "exex": {
+    "exec": {
       "code": "1111",
       "para": "0"
     },
     "btn_type": "imm"
   },
   "Presentation(1112,0)": {
-    "exex": {
+    "exec": {
       "code": "1112",
       "para": "0"
     },
     "btn_type": "imm"
   },
   "Presentation(1116,0)": {
-    "exex": {
+    "exec": {
       "code": "1116",
       "para": "0"
     },
     "btn_type": "imm"
   },
   "execute(1067,0)": {
-    "exex": {
+    "exec": {
       "code": "1067",
       "para": "0"
     },
     "btn_type": "imm"
   },
   "excavation()": {
-    "exex": {
+    "exec": {
       "code": "excavation()",
       "para": ""
     },
     "btn_type": "toggle_group_work_area"
   },
   "showAllObj()": {
-    "exex": {
+    "exec": {
       "code": "showAllObj()",
       "para": ""
     },
     "btn_type": "toggle_group_show"
   },
   "hiddenAllObj()": {
-    "exex": {
+    "exec": {
       "code": "hiddenAllObj()",
       "para": ""
     },
     "btn_type": "toggle_group_show"
   },
   "showPipeline()": {
-    "exex": {
+    "exec": {
       "code": "showPipeline()",
       "para": ""
     },
     "btn_type": "toggle_group_show"
   },
   "heightLabel": {
-    "exex": {
+    "exec": {
       "code": "heightMark()",
       "para": ""
     },
     "btn_type": "toggle_group_mark"
   },
   "coordLabel": {
-    "exex": {
+    "exec": {
       "code": "coordLabel()",
       "para": ""
     },
     "btn_type": "toggle_group_mark"
   },
   "SlopeLable": {
-    "exex": {
+    "exec": {
       "code": "SlopeLable()",
       "para": ""
     },
     "btn_type": "toggle_group_mark"
   },
   "clearLabel()": {
-    "exex": {
+    "exec": {
       "code": "clearLabel()",
       "para": ""
     },
     "btn_type": "imm"
-  }
+  },
+  "execute(1038,0)": {
+    "exec": {
+      "code": "1038",
+      "para": "0"
+    },
+    "btn_type": "imm"
+  },
+  "execute(1039,0)": {
+    "exec": {
+      "code": "1039",
+      "para": "0"
+    },
+    "btn_type": "imm"
+  },
+  "execute(1040,0)": {
+    "exec": {
+      "code": "1040",
+      "para": "0"
+    },
+    "btn_type": "imm"
+  },
+  "execute(1041,0)": {
+    "exec": {
+      "code": "1041",
+      "para": "0"
+    },
+    "btn_type": "imm"
+  },
+  "execute(1092,0)": {
+    "exec": {
+      "code": "1092",
+      "para": "0"
+    },
+    "btn_type": "imm"
+  },
+  "execute(1093,0)": {
+    "exec": {
+      "code": "1093",
+      "para": "0"
+    },
+    "btn_type": "imm"
+  },
+  "execute(1094,0)": {
+    "exec": {
+      "code": "1094",
+      "para": "0"
+    },
+    "btn_type": "imm"
+  },
+  "execute(1098,0)": {
+    "exec": {
+      "code": "1098",
+      "para": "0"
+    },
+    "btn_type": "imm"
+  },
 };
 
 
@@ -752,7 +810,6 @@ var ribbon_data = {
               "iconCls": "icon-choose icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             },
             {
@@ -763,20 +820,17 @@ var ribbon_data = {
                   "name": "execute(1022,0)",
                   "text": "属性",
                   "iconCls": "icon-attribute icon-small",
-                  "btn_type": "toggle",
                 },
                 {
                   "name": "information",
                   "text": "信息",
                   "iconCls": "icon-information icon-small",
-                  "btn_type": "toggle_group_work_area",
                   "group": "work_area",
                 },
                 {
                   "name": "areaSelection",
                   "text": "区域选择",
                   "iconCls": "icon-area icon-small",
-                  "btn_type": "toggle_group_work_area",
                   "group": "work_area",
                 }
               ]
@@ -792,7 +846,6 @@ var ribbon_data = {
               "iconCls": "icon-time icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle",
             },
             {
               "name": "sun",
@@ -800,7 +853,7 @@ var ribbon_data = {
               "iconCls": "icon-sun icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle",
+              "selected": true
             }
           ]
         },
@@ -813,7 +866,6 @@ var ribbon_data = {
               "iconCls": "icon-shadow icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle",
             },
             {
               "name": "undergroundMode",
@@ -821,7 +873,6 @@ var ribbon_data = {
               "iconCls": "icon-underground icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle",
             }
           ]
         },
@@ -834,7 +885,6 @@ var ribbon_data = {
               "iconCls": "icon-layer icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm",
             },
             {
               "name": "execute(1014,2)",
@@ -842,7 +892,6 @@ var ribbon_data = {
               "iconCls": "icon-grid icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm",
             },
             {
               "name": "execute(1016,0)",
@@ -850,7 +899,6 @@ var ribbon_data = {
               "iconCls": "icon-savorPoint icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm",
             },
             {
               "name": "execute(1018,0)",
@@ -858,7 +906,6 @@ var ribbon_data = {
               "iconCls": "icon-group icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm",
             }
           ]
         },
@@ -871,7 +918,6 @@ var ribbon_data = {
               "iconCls": "icon-paste icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm",
             },
             {
               "type": "toolbar",
@@ -881,19 +927,16 @@ var ribbon_data = {
                   "name": "execute(1031,0)",
                   "text": "复制",
                   "iconCls": "icon-copy icon-small",
-                  "btn_type": "imm",
                 },
                 {
                   "name": "execute(1032,0)",
                   "text": "剪切",
                   "iconCls": "icon-shear icon-small",
-                  "btn_type": "imm",
                 },
                 {
                   "name": "execute(1033,0)",
                   "text": "删除",
                   "iconCls": "icon-delete icon-small",
-                  "btn_type": "imm",
                 }
               ]
             }
@@ -913,7 +956,6 @@ var ribbon_data = {
               "iconCls": "icon-horizontal icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             },
             {
@@ -922,7 +964,6 @@ var ribbon_data = {
               "iconCls": "icon-space icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             },
             {
@@ -931,7 +972,6 @@ var ribbon_data = {
               "iconCls": "icon-vertical icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             },
             {
@@ -940,8 +980,6 @@ var ribbon_data = {
               "iconCls": "icon-area icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
-              "group": "work_area",
             },
             {
               "name": "threeDArea",
@@ -949,7 +987,6 @@ var ribbon_data = {
               "iconCls": "icon-threeDarea icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             }
           ]
@@ -958,20 +995,71 @@ var ribbon_data = {
           "title": "地形分析",
           "tools": [
             {
-              "name": "ContourMap",
-              "text": "等高线图",
-              "iconCls": "icon-denggao icon-large",
-              "iconAlign": "top",
-              "size": "large",
-              "btn_type": "imm"
-            },
-            {
-              "name": "SlopeAnalysis()",
-              "text": "坡度分析",
-              "iconCls": "icon-Slope icon-large",
-              "iconAlign": "top",
-              "size": "large",
-              "btn_type": "imm"
+              "type": "toolbar",
+              "tools": [
+                {
+                  "type": 'menubutton',
+                  "name": "cpas-menu",
+                  "text": "等高线图",
+                  "iconCls": "icon-denggao icon-large",
+                  "iconAlign": "left",
+                  "size": "large",
+                  "menuItems":[{
+                    name:'execute(1038,0)',
+                    text:'分层设色图',
+                  },{
+                    name:'execute(1039,0)',
+                    text:'等高线',
+                  }
+                  ,{
+                    name:'execute(1040,0)',
+                    text:'分层设色图和等高线',
+                  },{
+                    separator:true
+                  }
+                  ,{
+                    name:'execute(1041,0)',
+                    text:'等高线调色板',
+                  }]
+                },
+                {
+                  "type": 'menubutton',
+                  "name": "cpas-menu",
+                  "text": "坡度图",
+                  "iconCls": "icon-Slope icon-large",
+                  "iconAlign": "left",
+                  "size": "large",
+                  "menuItems":[{
+                    name:'execute(1092,0)',
+                    text:'坡度颜色图',
+                  },{
+                    name:'execute(1093,0)',
+                    text:'坡度箭头',
+                  }
+                  ,{
+                    name:'execute(1094,0)',
+                    text:'坡度箭头和颜色图',
+                  },{
+                    separator:true
+                  }
+                  ,{
+                    name:'execute(1098,0)',
+                    text:'坡度图调色板',
+                  }]
+                },
+                {
+                  "type": "label",
+                  "text": '',
+                  "css": {'clear':'both'}
+                },
+                {
+                  "type": "label",
+                  "text": '地形图',
+                  "css": {'width': '100%',
+                    'margin-top': '8px',
+                    'border-top': '1px dotted'}
+                },
+              ]
             },
             {
               "name": "execute(1042,0)",
@@ -979,7 +1067,6 @@ var ribbon_data = {
               "iconCls": "icon-path icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm"
             },
             {
               "name": "execute(1043,0)",
@@ -987,7 +1074,6 @@ var ribbon_data = {
               "iconCls": "icon-poumian icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm"
             },
             {
               "name": "execute(1044,0)",
@@ -995,7 +1081,6 @@ var ribbon_data = {
               "iconCls": "icon-yanmofenxi icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm"
             }
           ]
         },
@@ -1008,7 +1093,6 @@ var ribbon_data = {
               "iconCls": "icon-sight icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm"
             },
             {
               "name": "execute(2117,0)",
@@ -1016,7 +1100,6 @@ var ribbon_data = {
               "iconCls": "icon-threeD icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm"
             },
             {
               "name": "execute(1047,0)",
@@ -1024,7 +1107,6 @@ var ribbon_data = {
               "iconCls": "icon-perspective icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm"
             }
           ]
         },
@@ -1037,7 +1119,6 @@ var ribbon_data = {
               "iconCls": "icon-pengzhuang icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle"
             }
           ]
         }
@@ -1055,7 +1136,6 @@ var ribbon_data = {
               "iconCls": "icon-drag icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_nav",
               "group": "nav"
             },
             {
@@ -1064,7 +1144,6 @@ var ribbon_data = {
               "iconCls": "icon-huadong icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_nav",
               "group": "nav"
             },
             {
@@ -1073,7 +1152,6 @@ var ribbon_data = {
               "iconCls": "icon-zhuangwan icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_nav",
               "group": "nav"
             }
           ]
@@ -1087,7 +1165,6 @@ var ribbon_data = {
               "iconCls": "icon-threeD_ icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_pattern",
               "group": "pattern"
             },
             {
@@ -1096,7 +1173,6 @@ var ribbon_data = {
               "iconCls": "icon-twoD icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_pattern",
               "group": "pattern"
             },
             {
@@ -1105,7 +1181,6 @@ var ribbon_data = {
               "iconCls": "icon-zhibeidaohang icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_pattern",
               "group": "pattern"
             }
           ]
@@ -1119,7 +1194,6 @@ var ribbon_data = {
               "iconCls": "icon-suofang icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm"
             },
             {
               "name": "execute(1056,0)",
@@ -1127,7 +1201,6 @@ var ribbon_data = {
               "iconCls": "icon-zhibeizhen icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm"
             }
           ]
         },
@@ -1140,7 +1213,6 @@ var ribbon_data = {
               "iconCls": "icon-huanrao icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_round",
               "group": "round"
             },
             {
@@ -1151,21 +1223,18 @@ var ribbon_data = {
                   "name": "OvalRotate",
                   "text": "椭圆环绕",
                   "iconCls": "icon-tuoyuan icon-small",
-                  "btn_type": "toggle_group_round",
                   "group": "round"
                 },
                 {
                   "name": "ArcPattern",
                   "text": "弧形环绕",
                   "iconCls": "icon-Arc icon-small",
-                  "btn_type": "toggle_group_round",
                   "group": "round"
                 },
                 {
                   "name": "LinePattern",
                   "text": "直线模式",
                   "iconCls": "icon-line icon-small",
-                  "btn_type": "toggle_group_round",
                   "group": "round"
                 }
               ]
@@ -1181,7 +1250,6 @@ var ribbon_data = {
               "iconCls": "icon-houmian icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm"
             },
             {
               "name": "execute(1057,5)",
@@ -1189,7 +1257,6 @@ var ribbon_data = {
               "iconCls": "icon-up icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm"
             },
             {
               "name": "execute(1057,6)",
@@ -1197,7 +1264,6 @@ var ribbon_data = {
               "iconCls": "icon-down icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm"
             },
             {
               "name": "execute(1057,7)",
@@ -1205,7 +1271,6 @@ var ribbon_data = {
               "iconCls": "icon-right icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm"
             },
             {
               "name": "execute(1057,8)",
@@ -1213,7 +1278,6 @@ var ribbon_data = {
               "iconCls": "icon-left icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm"
             },
             {
               "name": "execute(1057,9)",
@@ -1221,7 +1285,6 @@ var ribbon_data = {
               "iconCls": "icon-houshang icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm"
             },
             {
               "name": "execute(1057,10)",
@@ -1229,7 +1292,6 @@ var ribbon_data = {
               "iconCls": "icon-jiashi icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm"
             },
             {
               "name": "execute(1057,11)",
@@ -1237,7 +1299,6 @@ var ribbon_data = {
               "iconCls": "icon-dimain icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm"
             }
           ]
         }
@@ -1255,7 +1316,6 @@ var ribbon_data = {
               "iconCls": "icon-zoomIn icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm"
             },
             {
               "name": "zoomOut()",
@@ -1263,7 +1323,6 @@ var ribbon_data = {
               "iconCls": "icon-zoomOut icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm"
             },
             {
               "name": "FullImage()",
@@ -1271,7 +1330,6 @@ var ribbon_data = {
               "iconCls": "icon-all icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm"
             },
             {
               "name": "zoomIn2DMap()",
@@ -1279,7 +1337,6 @@ var ribbon_data = {
               "iconCls": "icon-Eye icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle"
             }
           ]
         },
@@ -1292,7 +1349,6 @@ var ribbon_data = {
               "iconCls": "icon-kongjian icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle"
             },
             {
               "name": "CenterSign",
@@ -1300,7 +1356,6 @@ var ribbon_data = {
               "iconCls": "icon-shizi icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle"
             },
             {
               "name": "StatusBar",
@@ -1308,7 +1363,6 @@ var ribbon_data = {
               "iconCls": "icon-zhuangtai icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle"
             },
             {
               "name": "ScaleBar",
@@ -1316,7 +1370,6 @@ var ribbon_data = {
               "iconCls": "icon-bili icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle"
             },
             {
               "name": "GraphicHUD",
@@ -1324,7 +1377,6 @@ var ribbon_data = {
               "iconCls": "icon-hud icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle"
             }
           ]
         }
@@ -1342,7 +1394,6 @@ var ribbon_data = {
               "iconCls": "icon-wenben icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             },
             {
@@ -1351,7 +1402,6 @@ var ribbon_data = {
               "iconCls": "icon-tupian icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             }
           ]
@@ -1365,7 +1415,6 @@ var ribbon_data = {
               "iconCls": "icon-zhexian icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             },
             {
@@ -1374,7 +1423,6 @@ var ribbon_data = {
               "iconCls": "icon-duobianxing icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             },
             {
@@ -1383,7 +1431,6 @@ var ribbon_data = {
               "iconCls": "icon-juxing icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             },
             {
@@ -1392,7 +1439,6 @@ var ribbon_data = {
               "iconCls": "icon-zhengduobian icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             },
             {
@@ -1401,7 +1447,6 @@ var ribbon_data = {
               "iconCls": "icon-yuan icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             },
             {
@@ -1410,7 +1455,6 @@ var ribbon_data = {
               "iconCls": "icon-tuoyuan icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             },
             {
@@ -1419,7 +1463,6 @@ var ribbon_data = {
               "iconCls": "icon-hu icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             },
             {
@@ -1428,7 +1471,6 @@ var ribbon_data = {
               "iconCls": "icon-jiantou icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             }
           ]
@@ -1442,7 +1484,6 @@ var ribbon_data = {
               "iconCls": "icon-sanweimoxing icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             },
             {
@@ -1451,7 +1492,6 @@ var ribbon_data = {
               "iconCls": "icon-object icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             },
             {
@@ -1460,7 +1500,6 @@ var ribbon_data = {
               "iconCls": "icon-qiu icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             },
             {
@@ -1469,7 +1508,6 @@ var ribbon_data = {
               "iconCls": "icon-sanweijiantou icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             },
             {
@@ -1478,7 +1516,6 @@ var ribbon_data = {
               "iconCls": "icon-yuanzhu icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             }
           ]
@@ -1492,7 +1529,6 @@ var ribbon_data = {
               "iconCls": "icon-dimian icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             },
             {
@@ -1501,7 +1537,6 @@ var ribbon_data = {
               "iconCls": "icon-kongzhong icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             }
           ]
@@ -1539,7 +1574,6 @@ var ribbon_data = {
               "iconCls": "icon-choose icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             },
             {
@@ -1548,7 +1582,6 @@ var ribbon_data = {
               "iconCls": "icon-area icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             },
             {
@@ -1557,7 +1590,6 @@ var ribbon_data = {
               "iconCls": "icon-line icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             },
             {
@@ -1566,7 +1598,6 @@ var ribbon_data = {
               "iconCls": "icon-huapoint icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             },
             {
@@ -1575,7 +1606,6 @@ var ribbon_data = {
               "iconCls": "icon-objectC icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             }
           ]
@@ -1594,7 +1624,6 @@ var ribbon_data = {
               "iconCls": "icon-chuangjianyanshi icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm"
             }
           ]
         },
@@ -1607,7 +1636,6 @@ var ribbon_data = {
               "iconCls": "icon-jiaxingqudian icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             },
             {
@@ -1616,7 +1644,6 @@ var ribbon_data = {
               "iconCls": "icon-jiluguiji icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle",
             }
           ]
         },
@@ -1629,7 +1656,6 @@ var ribbon_data = {
               "iconCls": "icon-tianjiabiaoti icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm",
             },
             {
               "name": "Presentation(1111,0)",
@@ -1637,7 +1663,6 @@ var ribbon_data = {
               "iconCls": "icon-bianjigongju icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm",
             }
           ]
         },
@@ -1650,7 +1675,6 @@ var ribbon_data = {
               "iconCls": "icon-bofang icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm",
             },
             {
               "type": "toolbar",
@@ -1681,7 +1705,6 @@ var ribbon_data = {
               "iconCls": "icon-chuangjianshipin1 icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm",
             },
             {
               "type": "toolbar",
@@ -1717,7 +1740,6 @@ var ribbon_data = {
               "iconCls": "icon-ditijietu icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm",
             },
             {
               "name": "excavation()",
@@ -1725,7 +1747,6 @@ var ribbon_data = {
               "iconCls": "icon-dixingkaiwa icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_work_area",
               "group": "work_area",
             }
           ]
@@ -1739,7 +1760,6 @@ var ribbon_data = {
               "iconCls": "icon-xianshiquanbu icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_show",
               "group": "show",
             },
             {
@@ -1748,7 +1768,6 @@ var ribbon_data = {
               "iconCls": "icon-yinchangquanbu icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_show",
               "group": "show",
             },
             {
@@ -1757,7 +1776,6 @@ var ribbon_data = {
               "iconCls": "icon-zhikan icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_show",
               "group": "show",
             }
           ]
@@ -1771,7 +1789,6 @@ var ribbon_data = {
               "iconCls": "icon-choose icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_mark",
               "group": "mark",
             },
             {
@@ -1780,7 +1797,6 @@ var ribbon_data = {
               "iconCls": "icon-area icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_mark",
               "group": "mark",
             },
             {
@@ -1789,7 +1805,6 @@ var ribbon_data = {
               "iconCls": "icon-objectC icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "toggle_group_mark",
               "group": "mark",
             },
             {
@@ -1798,7 +1813,6 @@ var ribbon_data = {
               "iconCls": "icon-close icon-large",
               "iconAlign": "top",
               "size": "large",
-              "btn_type": "imm"
             }
           ]
         }
@@ -1808,16 +1822,16 @@ var ribbon_data = {
 };
 
 function ribbon_click(name, target){
+  if (name == 'cpas-menu') return
   var $SR = window.$SR;
   var btn = $SR.btns[name];
-  var type = btn.btn_type;
   var selected = $(target).hasClass('l-btn-selected');
   var disabled = $(target).hasClass('l-btn-disabled');
-  console.log(btn, selected, disabled);
+  console.log('btn_info', btn, selected, disabled);
   if (disabled) return
-  switch(type){
+  switch(btn.btn_type){
     case 'imm':
-      execute(btn.code, btn.para);
+      execute(btn.exec.code, btn.exec.para);
       break
     case 'toggle':
       if(!selected){
@@ -1825,7 +1839,7 @@ function ribbon_click(name, target){
       }else{
         $(target).removeClass('l-btn-selected');
       }
-      execute(btn.code, btn.para);
+      execute(btn.exec.code, btn.exec.para);
       break
     case 'toggle_group_work_area':
       if(!selected){
@@ -1834,17 +1848,17 @@ function ribbon_click(name, target){
       }else{
         $(target).removeClass('l-btn-selected');
       }
-      execute(btn.code, btn.para);
+      execute(btn.exec.code, btn.exec.para);
       break
     default:
-      if (type.substr(0, 13) == 'toggle_group_') {
+      if (btn.btn_type.substr(0, 13) == 'toggle_group_') {
         if(!selected){
-          $SR.find("[group='" + type.substr(13) + "']").removeClass('l-btn-selected');
+          $SR.find("[group='" + btn.btn_type.substr(13) + "']").removeClass('l-btn-selected');
           $(target).addClass('l-btn-selected');
         }else{
           return
         }
-        execute(btn.code, btn.para);
+        execute(btn.exec.code, btn.exec.para);
       }
       break
   }
@@ -1856,7 +1870,7 @@ function load_ribbon($skyline_ribbon){
   // 给jquery easyui拓展label
   $.fn.label = function(options){
     if (typeof options == 'object'){
-      this.css({
+      this.css($.extend({
         'float': 'left',
         'color': '#444',
         'padding': '1px',
@@ -1870,7 +1884,7 @@ function load_ribbon($skyline_ribbon){
         'vertical-align': 'middle',
         'font-size': '12px',
         'line-height': '24px'
-      });
+      }, options.css));
       this.append(options.text);
     }
   };
