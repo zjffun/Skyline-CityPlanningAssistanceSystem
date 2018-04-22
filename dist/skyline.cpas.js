@@ -21,7 +21,24 @@ function load_fly($skyline_layout){
 }
 
 function execute(Code, Parameter) {
-  console.log('exec', Code, Parameter, SGWorld.Command.CanExecute(Code, Parameter));
+  console.log('exec', Code, Parameter);
+  if (Code == 'zoomIn()') {
+    SGWorld.Navigate.ZoomIn();
+    return
+  }
+  if (Code == 'zoomOut()') {
+    SGWorld.Navigate.ZoomOut();
+    return
+  }
+  if (Code == 'FullImage()') {
+    var id = SGWorld.ProjectTree.FindItem("全图");
+    SGWorld.Navigate.FlyTo(id,0);
+    return
+  }
+  if (Code == 'zoomIn2DMap()') {
+    alert('正在开发');
+    return
+  }
   if (SGWorld.Command.CanExecute(Code, Parameter) == false) {
     alert("此工具当前不可用");
   } else {
@@ -34,10 +51,10 @@ function execute(Code, Parameter) {
   类型 btn_type: 
     默认 imm(immediatly) 直接执行
     可选 toggle 开关
-    可选 toggle_group_work_area 工作区开关组
+    可选 toggle_group_work_area 工作区开关组（点击已选择的可取消选择）
     可选 toggle_group_pattern 模式开关组
     可选 toggle_group_nav 导航开关组
-    可选 toggle_group_round 环绕开关组
+    可选 toggle_group_round 环绕开关组（点击已选择的可取消选择）
     可选 toggle_group_show 显示开关组
     可选 toggle_group_mark 标注开关组
   代号code: 
@@ -792,6 +809,48 @@ var ribbon_btns = {
     },
     "btn_type": "imm"
   },
+  "execute(1055,5)": {
+    "exec": {
+      "code": "1055",
+      "para": "5"
+    },
+    "btn_type": "imm"
+  },
+  "execute(1055,4)": {
+    "exec": {
+      "code": "1055",
+      "para": "4"
+    },
+    "btn_type": "imm"
+  },
+  "execute(1055,3)": {
+    "exec": {
+      "code": "1055",
+      "para": "3"
+    },
+    "btn_type": "imm"
+  },
+  "execute(1055,2)": {
+    "exec": {
+      "code": "1055",
+      "para": "2"
+    },
+    "btn_type": "imm"
+  },
+  "execute(1055,1)": {
+    "exec": {
+      "code": "1055",
+      "para": "1"
+    },
+    "btn_type": "imm"
+  },
+  "execute(1055,0)": {
+    "exec": {
+      "code": "1055",
+      "para": "0"
+    },
+    "btn_type": "imm"
+  },
 };
 
 
@@ -1189,11 +1248,46 @@ var ribbon_data = {
           "title": "导航到",
           "tools": [
             {
-              "name": "zoomBtn()",
-              "text": "缩放",
-              "iconCls": "icon-suofang icon-large",
-              "iconAlign": "top",
-              "size": "large",
+              "type": "toolbar",
+              "dir": "v",
+              "tools": [
+                {
+                  "name": "execute(1055,5)",
+                  "text": "全球",
+                  "iconCls": "",
+                },
+                {
+                  "name": "execute(1055,4)",
+                  "text": "国家",
+                  "iconCls": "",
+                },
+                {
+                  "name": "execute(1055,3)",
+                  "text": "省份",
+                  "iconCls": "",
+                }
+              ]
+            },
+            {
+              "type": "toolbar",
+              "dir": "v",
+              "tools": [
+                {
+                  "name": "execute(1055,2)",
+                  "text": "城市",
+                  "iconCls": "",
+                },
+                {
+                  "name": "execute(1055,1)",
+                  "text": "街道",
+                  "iconCls": "",
+                },
+                {
+                  "name": "execute(1055,0)",
+                  "text": "房屋",
+                  "iconCls": "",
+                }
+              ]
             },
             {
               "name": "execute(1056,0)",
@@ -1841,9 +1935,19 @@ function ribbon_click(name, target){
       }
       execute(btn.exec.code, btn.exec.para);
       break
+      
     case 'toggle_group_work_area':
       if(!selected){
         $SR.find("[group='work_area']").removeClass('l-btn-selected');
+        $(target).addClass('l-btn-selected');
+      }else{
+        $(target).removeClass('l-btn-selected');
+      }
+      execute(btn.exec.code, btn.exec.para);
+      break
+    case 'toggle_group_round':
+      if(!selected){
+        $SR.find("[group='round']").removeClass('l-btn-selected');
         $(target).addClass('l-btn-selected');
       }else{
         $(target).removeClass('l-btn-selected');

@@ -19,9 +19,19 @@ export default function(name, target){
       }
       execute(btn.exec.code, btn.exec.para)
       break
+      toggle_group_round
     case 'toggle_group_work_area':
       if(!selected){
         $SR.find("[group='work_area']").removeClass('l-btn-selected')
+        $(target).addClass('l-btn-selected')
+      }else{
+        $(target).removeClass('l-btn-selected')
+      }
+      execute(btn.exec.code, btn.exec.para)
+      break
+    case 'toggle_group_round':
+      if(!selected){
+        $SR.find("[group='round']").removeClass('l-btn-selected')
         $(target).addClass('l-btn-selected')
       }else{
         $(target).removeClass('l-btn-selected')

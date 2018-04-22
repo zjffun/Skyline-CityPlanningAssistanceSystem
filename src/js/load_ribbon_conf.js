@@ -4,10 +4,10 @@ export {ribbon_data, ribbon_btns}
   类型 btn_type: 
     默认 imm(immediatly) 直接执行
     可选 toggle 开关
-    可选 toggle_group_work_area 工作区开关组
+    可选 toggle_group_work_area 工作区开关组（点击已选择的可取消选择）
     可选 toggle_group_pattern 模式开关组
     可选 toggle_group_nav 导航开关组
-    可选 toggle_group_round 环绕开关组
+    可选 toggle_group_round 环绕开关组（点击已选择的可取消选择）
     可选 toggle_group_show 显示开关组
     可选 toggle_group_mark 标注开关组
   代号code: 
@@ -762,6 +762,48 @@ var ribbon_btns = {
     },
     "btn_type": "imm"
   },
+  "execute(1055,5)": {
+    "exec": {
+      "code": "1055",
+      "para": "5"
+    },
+    "btn_type": "imm"
+  },
+  "execute(1055,4)": {
+    "exec": {
+      "code": "1055",
+      "para": "4"
+    },
+    "btn_type": "imm"
+  },
+  "execute(1055,3)": {
+    "exec": {
+      "code": "1055",
+      "para": "3"
+    },
+    "btn_type": "imm"
+  },
+  "execute(1055,2)": {
+    "exec": {
+      "code": "1055",
+      "para": "2"
+    },
+    "btn_type": "imm"
+  },
+  "execute(1055,1)": {
+    "exec": {
+      "code": "1055",
+      "para": "1"
+    },
+    "btn_type": "imm"
+  },
+  "execute(1055,0)": {
+    "exec": {
+      "code": "1055",
+      "para": "0"
+    },
+    "btn_type": "imm"
+  },
 }
 
 
@@ -1159,11 +1201,46 @@ var ribbon_data = {
           "title": "导航到",
           "tools": [
             {
-              "name": "zoomBtn()",
-              "text": "缩放",
-              "iconCls": "icon-suofang icon-large",
-              "iconAlign": "top",
-              "size": "large",
+              "type": "toolbar",
+              "dir": "v",
+              "tools": [
+                {
+                  "name": "execute(1055,5)",
+                  "text": "全球",
+                  "iconCls": "",
+                },
+                {
+                  "name": "execute(1055,4)",
+                  "text": "国家",
+                  "iconCls": "",
+                },
+                {
+                  "name": "execute(1055,3)",
+                  "text": "省份",
+                  "iconCls": "",
+                }
+              ]
+            },
+            {
+              "type": "toolbar",
+              "dir": "v",
+              "tools": [
+                {
+                  "name": "execute(1055,2)",
+                  "text": "城市",
+                  "iconCls": "",
+                },
+                {
+                  "name": "execute(1055,1)",
+                  "text": "街道",
+                  "iconCls": "",
+                },
+                {
+                  "name": "execute(1055,0)",
+                  "text": "房屋",
+                  "iconCls": "",
+                }
+              ]
             },
             {
               "name": "execute(1056,0)",
