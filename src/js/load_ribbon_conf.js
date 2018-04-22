@@ -1396,6 +1396,7 @@ var ribbon_data = {
               "iconCls": "icon-kongjian icon-large",
               "iconAlign": "top",
               "size": "large",
+              "selected": true
             },
             {
               "name": "CenterSign",
