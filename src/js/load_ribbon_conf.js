@@ -1865,6 +1865,79 @@ var ribbon_data = {
           ]
         }
       ]
+    },
+    {
+      "title": "规划方案对比",
+      "groups": [
+        {
+          "title": "",
+          "tools": [
+            {
+              "name": "",
+              "text": "开启多方案对比",
+              "iconCls": "icon-ditijietu icon-large",
+              "iconAlign": "top",
+              "size": "large",
+            },
+            {
+              "name": "",
+              "text": "操作方案1",
+              "iconCls": "icon-dixingkaiwa icon-large",
+              "iconAlign": "top",
+              "size": "large",
+            },
+            {
+              "name": "",
+              "text": "操作方案2",
+              "iconCls": "icon-dixingkaiwa icon-large",
+              "iconAlign": "top",
+              "size": "large",
+            },
+            {
+              "name": "",
+              "text": "对比分析统计表",
+              "iconCls": "icon-dixingkaiwa icon-large",
+              "iconAlign": "top",
+              "size": "large",
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "用地红线",
+      "groups": [
+        {
+          "title": "",
+          "tools": [
+            {
+              "name": "",
+              "text": "显示红线",
+              "iconCls": "icon-ditijietu icon-large",
+              "iconAlign": "top",
+              "size": "large",
+            },
+            {
+              "name": "",
+              "text": "红线检测",
+              "iconCls": "icon-dixingkaiwa icon-large",
+              "iconAlign": "top",
+              "size": "large",
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "视频监控",
+      "groups": [
+        {
+          "title": "",
+          "tools": [
+            
+          ]
+        }
+      ]
     }
   ]
 }
