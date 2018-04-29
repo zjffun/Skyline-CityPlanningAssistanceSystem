@@ -372,22 +372,26 @@ var ribbon_btns = {
     "btn_type": "imm"
   },
   "zoomIn()": {
-    "exec": {
-      "code": "zoomIn()",
-      "para": ""
+    "exec": function(){
+      SGWorld.Navigate.ZoomIn()
     },
     "btn_type": "imm"
   },
   "zoomOut()": {
     "exec": {
-      "code": "zoomOut()",
+      "code": function(){
+        SGWorld.Navigate.ZoomOut()
+      },
       "para": ""
     },
     "btn_type": "imm"
   },
   "FullImage()": {
     "exec": {
-      "code": "FullImage()",
+      "code": function(){
+        var id = SGWorld.ProjectTree.FindItem("全图")
+        SGWorld.Navigate.FlyTo(id,0)
+      },
       "para": ""
     },
     "btn_type": "imm"
@@ -595,9 +599,17 @@ var ribbon_btns = {
     "btn_type": "toggle_group_work_area"
   },
   "createPresentation()": {
-    "exec": {
-      "code": "createPresentation()",
-      "para": ""
+    "exec": function(){
+      var itemId = SGWorld.ProjectTree.FindItem("演示工具");
+      if (itemId == "") {
+          itemId = SGWorld.ProjectTree.CreateGroup("演示工具");
+      }
+      var name = "演示工具#" + (Math.ceil(Math.random() * 100000));
+      SGWorld.Creator.CreatePresentation(itemId, name);
+      var Id = SGWorld.ProjectTree.FindItem("演示工具\\" + name);
+      if (Id != "") {
+          SGWorld.ProjectTree.SelectItem(Id);
+      }
     },
     "btn_type": "imm"
   },
@@ -803,6 +815,21 @@ var ribbon_btns = {
       "para": "0"
     },
     "btn_type": "imm"
+  },
+  "comparison": {
+    "exec": function(){
+      window.open('./pro1.html');
+      window.open('./pro2.html');
+      // 非常重要！不然打开的页面无法加载地图
+      window.opener=null;
+    },
+    "btn_type": "imm"
+  },
+  "prosync": {
+    "exec": function(){
+
+    },
+    "btn_type": "toggle"
   },
 }
 
@@ -1867,74 +1894,83 @@ var ribbon_data = {
       ]
     },
     {
-      "title": "规划方案对比",
+      "title": "辅助功能",
       "groups": [
         {
-          "title": "",
+          "title": "规划方案对比",
           "tools": [
             {
-              "name": "",
+              "name": "comparison",
               "text": "开启多方案对比",
-              "iconCls": "icon-ditijietu icon-large",
+              "iconCls": "icon-comparison icon-large",
               "iconAlign": "top",
               "size": "large",
             },
             {
-              "name": "",
-              "text": "操作方案1",
-              "iconCls": "icon-dixingkaiwa icon-large",
+              "name": "prosync",
+              "text": "方案同步",
+              "iconCls": "icon-prosync icon-large",
               "iconAlign": "top",
               "size": "large",
             },
             {
-              "name": "",
-              "text": "操作方案2",
-              "iconCls": "icon-dixingkaiwa icon-large",
-              "iconAlign": "top",
-              "size": "large",
-            },
-            {
-              "name": "",
+              "name": "comptable",
               "text": "对比分析统计表",
               "iconCls": "icon-dixingkaiwa icon-large",
               "iconAlign": "top",
               "size": "large",
             }
           ]
-        }
-      ]
-    },
-    {
-      "title": "用地红线",
-      "groups": [
+        },
         {
-          "title": "",
+          "title": "用地红线",
           "tools": [
             {
               "name": "",
               "text": "显示红线",
-              "iconCls": "icon-ditijietu icon-large",
+              "iconCls": "icon-showrl icon-large",
               "iconAlign": "top",
               "size": "large",
             },
             {
               "name": "",
               "text": "红线检测",
-              "iconCls": "icon-dixingkaiwa icon-large",
+              "iconCls": "icon-anarl icon-large",
               "iconAlign": "top",
               "size": "large",
             }
           ]
-        }
-      ]
-    },
-    {
-      "title": "视频监控",
-      "groups": [
+        },
         {
-          "title": "",
+          "title": "视频监控",
           "tools": [
-            
+            {
+              "name": "",
+              "text": "查看摄像头",
+              "iconCls": "icon-showcamera icon-large",
+              "iconAlign": "top",
+              "size": "large",
+            },
+            {
+              "name": "",
+              "text": "上一个",
+              "iconCls": "icon-next icon-large",
+              "iconAlign": "top",
+              "size": "large",
+            },{
+              "name": "",
+              "text": "下一个",
+              "iconCls": "icon-prev icon-large",
+              "iconAlign": "top",
+              "size": "large",
+            },
+            {
+              "name": "",
+              "text": "监控范围",
+              "iconCls": "icon-range icon-large",
+              "iconAlign": "top",
+              "size": "large",
+            }
           ]
         }
       ]

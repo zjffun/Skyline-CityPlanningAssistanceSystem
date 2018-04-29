@@ -9,7 +9,7 @@ export default function(name, target){
   if (disabled) return
   switch(btn.btn_type){
     case 'imm':
-      execute(btn.exec.code, btn.exec.para)
+      execute(btn)
       break
     case 'toggle':
       if(!selected){
@@ -17,7 +17,7 @@ export default function(name, target){
       }else{
         $(target).removeClass('l-btn-selected')
       }
-      execute(btn.exec.code, btn.exec.para)
+      execute(btn)
       break
       toggle_group_round
     case 'toggle_group_work_area':
@@ -27,7 +27,7 @@ export default function(name, target){
       }else{
         $(target).removeClass('l-btn-selected')
       }
-      execute(btn.exec.code, btn.exec.para)
+      execute(btn)
       break
     case 'toggle_group_round':
       if(!selected){
@@ -36,7 +36,7 @@ export default function(name, target){
       }else{
         $(target).removeClass('l-btn-selected')
       }
-      execute(btn.exec.code, btn.exec.para)
+      execute(btn)
       break
     default:
       if (btn.btn_type.substr(0, 13) == 'toggle_group_') {
@@ -46,7 +46,7 @@ export default function(name, target){
         }else{
           return
         }
-        execute(btn.exec.code, btn.exec.para)
+        execute(btn)
       }
       break
   }

@@ -123,3 +123,12 @@
 .icon-area{background-image: url('images/area.png')}
 .icon-objectC{background-image: url('images/objectC.png')}
 .icon-close{background-image: url('images/close.png')}
+/*辅助功能*/
+.icon-comparison{background-image: url('images/grid.png')}
+.icon-prosync{background-image: url('images/sight.png')}
+.icon-showrl{background-image: url('images/Route.png')}
+.icon-anarl{background-image: url('images/guanyu.png')}
+.icon-showcamera{background-image: url('images/chuangjianshipin1.png')}
+.icon-prev{background-image: url('images/right.png')}
+.icon-next{background-image: url('images/left.png')}
+.icon-range{background-image: url('images/jietu.png')}

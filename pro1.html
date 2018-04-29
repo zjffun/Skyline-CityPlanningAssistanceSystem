@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>阜新市三维规划辅助系统-多方案对比分析</title>
+  <link rel="stylesheet" type="text/css" href="./jquery-easyui/easyui.css">
+  <link rel="stylesheet" type="text/css" href="./jquery-easyui/icon.css">
+  <link rel="stylesheet" type="text/css" href="./jquery-easyui/ribbon.css">
+  <link rel="stylesheet" type="text/css" href="./jquery-easyui/ribbon-icon.css">
+  <link rel="stylesheet" type="text/css" href="./css/skyline-ribbon-icon.css">
+  <style>
+  /*修改最大的按钮的样式*/
+  .l-btn-large .l-btn-icon-top .l-btn-icon {
+    margin: 0 0 0 -25px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+  }
+  .l-btn-large .l-btn-icon-top .l-btn-text {
+    margin-top: 50px;
+    line-height: 24px;
+    min-width: 50px;
+  }
+  </style>
+  <script>
+  </script>
+</head>
+<!-- data-options="fit:true" -->
+<body id="skyline-layout" >
+  <!-- 菜单栏 -->
+  <div data-options="region:'north',split:true,title:'工具'" style="width:100%;height:130px;max-height:130px;overflow: hidden;">
+    <div id="ribbon">
+      <div class="panel panel-htop" style="display: block;">
+        <div title="" class="panel-body panel-body-noheader panel-body-noborder ribbon-tab" style="width: 1354px;">
+          <div class="ribbon-group">
+            <a onclick="(function(btn){
+              console.log(btn)
+            })(this)" href="javascript:void(0)" class="l-btn l-btn-large l-btn-plain" group="" id=""><span class="l-btn-left l-btn-icon-top"><span class="l-btn-text">方案联动</span><span class="l-btn-icon icon-comparison icon-large">&nbsp;</span></span></a>
+            <a onclick="(function(btn){
+              console.log(btn)
+            })(this)" href="javascript:void(0)" class="l-btn l-btn-large l-btn-plain" group="" id=""><span class="l-btn-left l-btn-icon-top"><span class="l-btn-text">方案对比统计表</span><span class="l-btn-icon icon-dixingkaiwa icon-large">&nbsp;</span></span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 底部信息 -->
+  <div data-options="region:'south'" style="height:40px; line-height: 40px; text-align: center; overflow: hidden">
+    ©&nbsp;2018&nbsp;辽宁工程技术大学&nbsp;测绘与地理科学学院&nbsp;地理信息科学专业14级&nbsp;张举丰
+  </div>
+  <!-- 工程树 -->
+  <!-- <div data-options="region:'west',title:'方案',split:true" style="width:250px;">
+  </div> -->
+  <!-- 工作空间 -->
+  <div data-options="region:'center'" title="方案一">
+  </div>
+  <script type="text/javascript" src="./jquery-easyui/jquery.min.js"></script>
+  <script type="text/javascript" src="./jquery-easyui/jquery.easyui.min.js"></script>
+  <script type="text/javascript" src="./jquery-easyui/jquery.ribbon.js"></script>
+  <script type="text/javascript" src="./dist/skyline.cpas.js"></script>
+  <script>
+    if(location.hash){
+      window.open('./pro1.html')
+    }else{
+      $(window).load(function(){
+        // 布局
+        var $skyline_layout = $('#skyline-layout').layout()
+        alert(123)
+        $skyline_layout.layout('panel', 'center')
+          .append('<object id="TerraExplorer3DWindow" classid="CLSID:3a4f9192-65a8-11d5-85c1-0001023952c1" style="width: 100%;height: calc(100% - 5px);"></object>')
+        $('body').append('<object id="SGWorld" classid="CLSID:3a4f9197-65a8-11d5-85c1-0001023952c1" style="visibility:hidden;"></object>')
+        SGWorld.Open(CPAS.FLY_PATH)
+      });
+    }
+    
+  </script>
+</body>
+</html>
+
