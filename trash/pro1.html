@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>阜新市三维规划辅助系统-多方案对比分析</title>
+  <link rel="stylesheet" type="text/css" href="./jquery-easyui/easyui.css">
+  <link rel="stylesheet" type="text/css" href="./jquery-easyui/icon.css">
+  <link rel="stylesheet" type="text/css" href="./jquery-easyui/ribbon.css">
+  <link rel="stylesheet" type="text/css" href="./jquery-easyui/ribbon-icon.css">
+  <link rel="stylesheet" type="text/css" href="./css/skyline-ribbon-icon.css">
+  <style>
+  /*修改最大的按钮的样式*/
+  .l-btn-large .l-btn-icon-top .l-btn-icon {
+    margin: 0 0 0 -25px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+  }
+  .l-btn-large .l-btn-icon-top .l-btn-text {
+    margin-top: 50px;
+    line-height: 24px;
+    min-width: 50px;
+  }
+  </style>
+</head>
+<!-- data-options="fit:true" -->
+<body id="skyline-layout" >
+  <!-- 菜单栏 -->
+  <div data-options="region:'north',split:true,title:'工具'" style="width:100%;height:130px;max-height:130px;overflow: hidden;">
+    <div id="ribbon">
+      <div class="panel panel-htop" style="display: block;">
+        <div title="" class="panel-body panel-body-noheader panel-body-noborder ribbon-tab" style="width: 1354px;">
+          <div class="ribbon-group">
+            <a onclick="(function(btn){
+              console.log(btn)
+            })(this)" href="javascript:void(0)" class="l-btn l-btn-large l-btn-plain" group="" id=""><span class="l-btn-left l-btn-icon-top"><span class="l-btn-text">方案联动</span><span class="l-btn-icon icon-comparison icon-large">&nbsp;</span></span></a>
+            <a onclick="(function(btn){
+              console.log(btn)
+            })(this)" href="javascript:void(0)" class="l-btn l-btn-large l-btn-plain" group="" id=""><span class="l-btn-left l-btn-icon-top"><span class="l-btn-text">方案对比统计表</span><span class="l-btn-icon icon-dixingkaiwa icon-large">&nbsp;</span></span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 底部信息 -->
+  <div data-options="region:'south'" style="height:40px; line-height: 40px; text-align: center; overflow: hidden">
+    ©&nbsp;2018&nbsp;辽宁工程技术大学&nbsp;测绘与地理科学学院&nbsp;地理信息科学专业14级&nbsp;张举丰
+  </div>
+  <!-- 工程树 -->
+  <!-- <div data-options="region:'west',title:'方案',split:true" style="width:250px;">
+  </div> -->
+  <!-- 工作空间 -->
+  <div data-options="region:'center'" title="方案一">
+  </div>
+  <script type="text/javascript" src="./jquery-easyui/jquery.min.js"></script>
+  <script type="text/javascript" src="./jquery-easyui/jquery.easyui.min.js"></script>
+  <script type="text/javascript" src="./jquery-easyui/jquery.ribbon.js"></script>
+  <script type="text/javascript" src="./dist/skyline.cpas.js"></script>
+  <script>
+
+    $(window).load(function(){
+      // 布局
+      var $skyline_layout = $('#skyline-layout').layout()
+      $skyline_layout.layout('panel', 'center')
+        .append('<object id="TerraExplorer3DWindow" classid="CLSID:3a4f9192-65a8-11d5-85c1-0001023952c1" style="width: 100%;height: calc(100% - 5px);"></object>')
+      $('body').append('<object id="SGWorld" classid="CLSID:3a4f9197-65a8-11d5-85c1-0001023952c1" style="visibility:hidden;"></object>')
+      SGWorld.Open(CPAS.FLY_PATH)
+
+      // ws
+      var wsServer = new WebSocket('ws://127.0.0.1:18848');
+      wsServer.onopen = function (e) {
+         (typeof e == 'string') && wsServer.send(e);//向后台发送数据
+      };
+      wsServer.onclose = function (e) {//当链接关闭的时候触发
+
+      };
+      wsServer.onmessage = function (e) {//后台返回消息的时候触发
+        console.log(e);
+        // console.log('get_sync_info')
+        // console.log(data)
+        var sync_info = JSON.parse(e.data).sync_info
+        var pos_arr = sync_info.pos
+        var pos = SGWorld.Creator.CreatePosition(pos_arr[0], pos_arr[1], pos_arr[2], pos_arr[3], pos_arr[4], pos_arr[5]);
+        SGWorld.Navigate.SetPosition(pos);
+      };
+      wsServer.onerror = function (e) {//错误情况触发
+
+      }
+
+      // 每0.5秒查看位置是否变化
+      last_pos = {};
+      var sync_interval = setInterval(function(){
+        var pos = SGWorld.Navigate.GetPosition();
+        var mi = SGWorld.Window.GetMouseInfo()
+        if (mi.x < 0 || mi.y < 0) {return}
+        if (pos.X - last_pos.X > 1 || 
+          pos.Y - last_pos.Y > 1 || 
+          pos.Altitude - last_pos.Altitude > 1 || 
+          pos.Yaw - last_pos.Yaw > 1 ||
+          pos.Pitch - last_pos.Pitch > 0.01 
+          ) {
+          console.log('set_sync_info')
+          // console.log([pos.X, pos.Y, pos.Altitude, 0, pos.Yaw, pos.Pitch])
+          wsServer.onopen(JSON.stringify({
+            sync_info: {
+              pos: [pos.X, pos.Y, pos.Altitude, 0, pos.Yaw, pos.Pitch],
+            }
+          }))
+        }
+        last_pos = pos;
+      }, 100)
+    });
+
+    /*废弃：
+      last_pos = {};
+      var sync_interval = setInterval(function(){
+        var pos = SGWorld.Navigate.GetPosition();
+        if (pos.X - last_pos.X > 1 || 
+          pos.Y - last_pos.Y > 1 || 
+          pos.Altitude - last_pos.Altitude > 1 || 
+          pos.Yaw - last_pos.Yaw > 1 ||
+          pos.Pitch - last_pos.Pitch > 0.01 
+          ) {
+          // console.log('set_sync_info')
+          // console.log([pos.X, pos.Y, pos.Altitude, 0, pos.Yaw, pos.Pitch])
+          $.get('http://localhost:8848/set_sync_info?data=' + JSON.stringify({
+            sync_info: {
+              pro: 'pro1',
+              pos: [pos.X, pos.Y, pos.Altitude, 0, pos.Yaw, pos.Pitch],
+            }
+          }))
+
+        }else{
+          $.get('http://localhost:8848/get_sync_info?'+Math.random(), function(data){
+            // console.log('get_sync_info')
+            // console.log(data)
+            var sync_info = JSON.parse(data.data).sync_info
+            if(sync_info.pro == 'pro1') return
+            var pos_arr = sync_info.pos
+            var pos = SGWorld.Creator.CreatePosition(pos_arr[0], pos_arr[1], pos_arr[2], pos_arr[3], pos_arr[4], pos_arr[5]);
+            SGWorld.Navigate.SetPosition(pos);
+          }, 'json')
+        }
+        last_pos = pos
+      }, 500)
+    */
+
+    /*废弃：
+      $('body').mousemove(function(e) {
+        var pos = SGWorld.Navigate.GetPosition();
+        console.log([pos.X, pos.Y, pos.Altitude, 0, pos.Yaw, pos.Pitch])
+        $.get('http://localhost:8848/set_sync_info?data=' + JSON.stringify({
+          sync_info: {
+            pro: 'pro1',
+            pos: [pos.X, pos.Y, pos.Altitude, 0, pos.Yaw, pos.Pitch],
+          }
+        }))
+      })
+      SGWorld.AttachEvent("onFrame", function(){
+        var pos = SGWorld.Navigate.GetPosition();
+        console.log([pos.X, pos.Y, pos.Altitude, 0, pos.Yaw, pos.Pitch])
+        $.get('http://localhost:8848/set_sync_info?data=' + JSON.stringify({
+          sync_info: {
+            pro: 'pro1',
+            pos: [pos.X, pos.Y, pos.Altitude, 0, pos.Yaw, pos.Pitch],
+          }
+        }))
+      });
+    */
+  </script>
+</body>
+</html>
+

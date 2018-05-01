@@ -13,6 +13,7 @@ export default function($skyline_layout){
   $skyline_layout.layout('panel', 'center')
     .append('<object id="TerraExplorer3DWindow" classid="CLSID:3a4f9192-65a8-11d5-85c1-0001023952c1" style="width: 100%;height: calc(100% - 5px);"></object>')
   $('body').append('<object id="SGWorld" classid="CLSID:3a4f9197-65a8-11d5-85c1-0001023952c1" style="visibility:hidden;"></object>')
-  SGWorld.Open(this.FLY_PATH)
-
+  $.get("./get_path", function(path){
+    SGWorld.Open(path + "\\data\\test.fly")
+  })
 }

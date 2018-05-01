@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>阜新市三维规划辅助系统-多方案对比分析</title>
+  <link rel="stylesheet" type="text/css" href="./jquery-easyui/easyui.css">
+  <link rel="stylesheet" type="text/css" href="./jquery-easyui/icon.css">
+  <link rel="stylesheet" type="text/css" href="./jquery-easyui/ribbon.css">
+  <link rel="stylesheet" type="text/css" href="./jquery-easyui/ribbon-icon.css">
+  <link rel="stylesheet" type="text/css" href="./css/skyline-ribbon-icon.css">
+  <style>
+  /*修改最大的按钮的样式*/
+  .l-btn-large .l-btn-icon-top .l-btn-icon {
+    margin: 0 0 0 -16px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+  }
+  .l-btn-large .l-btn-icon-top .l-btn-text {
+    margin-top: 32px;
+    line-height: 24px;
+    min-width: 32px;
+  }
+  </style>
+</head>
+<body>
+  <!-- 菜单栏,title:'工具' -->
+  <div data-options="region:'north',split:true" style="width:100%;max-height:74px;overflow: hidden;">
+    <div id="ribbon">
+      <div class="panel panel-htop" style="display: block;">
+        <div title="" class="panel-body panel-body-noheader panel-body-noborder ribbon-tab" style="width: 1354px;">
+          <div class="ribbon-group">
+            <a onclick="(function(btn){
+              if ($(btn).hasClass('l-btn-selected')) {
+                s3.stop()
+                $(btn).removeClass('l-btn-selected')
+              }else{
+                s3.start()
+                $(btn).addClass('l-btn-selected')
+              }
+            })(this)" href="javascript:void(0)" class="l-btn l-btn-large l-btn-plain l-btn-selected" group="" id=""><span class="l-btn-left l-btn-icon-top"><span class="l-btn-text">方案联动</span><span class="l-btn-icon icon-comparison icon-large">&nbsp;</span></span></a>
+            <a onclick="(function(btn){
+              console.log(btn)
+            })(this)" href="javascript:void(0)" class="l-btn l-btn-large l-btn-plain" group="" id=""><span class="l-btn-left l-btn-icon-top"><span class="l-btn-text">统计表</span><span class="l-btn-icon icon-shuxingbiao icon-large">&nbsp;</span></span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 底部信息 -->
+  <div data-options="region:'south'" style="height:40px; line-height: 40px; text-align: center; overflow: hidden">
+    ©&nbsp;2018&nbsp;辽宁工程技术大学&nbsp;测绘与地理科学学院&nbsp;地理信息科学专业14级&nbsp;张举丰
+  </div>
+  <div data-options="region:'center'" title="">
+  </div>
+  <script src="./node_modules/jquery/dist/jquery.js"></script>
+  <script type="text/javascript" src="./jquery-easyui/jquery.easyui.min.js"></script>
+  <script type="text/javascript" src="./jquery-easyui/jquery.ribbon.js"></script>
+  <script src="./node_modules/skyline-3dwindowsync/dist/s3dws.js"></script>
+  <script>
+    $(function(){
+      /*
+        加载页面时如果有JS改动了object节点可能会导致Skyline插件失效
+        （eg：使用jquery-easyui时先加载object再初始化界面Skyline插件会失效）
+        所以应该在页面完成动态加载object节点
+      */
+      var $layout = $('body').layout()
+      $layout.layout('panel', 'center')
+        .append('<object id="TerraExplorer3DWindow" classid="CLSID:3a4f9192-65a8-11d5-85c1-0001023952c1" style="width: 100%;height: calc(100% - 5px);"></object>')
+      $('body').append('<object id="SGWorld" classid="CLSID:3a4f9197-65a8-11d5-85c1-0001023952c1" style="visibility:hidden;"></object>')
+      $layout.layout('panel', 'center').panel({'title': GetRequest().title})
+      // 配置fly_path
+      // fly可以直接发布成网络的，但mpt的发布成网络的必须装TerraGate Manager，还是获取路径用本地的比较方便
+      $.get("./get_path", function(path){
+        window.s3 = s3dws.init({fly_path: path + "\\data\\test.fly"})
+      })
+    });
+
+    // 获取url中的get参数
+    function GetRequest() {  
+       var url = location.search; //获取url中"?"符后的字串  
+       var theRequest = new Object();  
+       if (url.indexOf("?") != -1) {  
+          var gstr = url.substr(1);  
+          gs = gstr.split("&")
+          for(var i = 0; i < gs.length; i ++) {
+            var g = gs[i].split("=")
+            theRequest[g[0]] = decodeURI(g[1]);  
+          }
+       }  
+       return theRequest;  
+    }
+  </script>
+</body>
+</html>
+

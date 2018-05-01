@@ -7,9 +7,16 @@ gulp.task('build', () => {
   });
 });
 
-gulp.task('watch',function(){
+gulp.task('watch', () => {
   gulp.watch(['./src/js/*.js', './src/rollup.js'], ['build']);
 })
 
-gulp.task('default', ['build', 'watch']);
+gulp.task('start_app', () => {
+  exec('node app', function(err, stdout, stderr) {
+    console.log(stderr);
+  });
+  gulp.watch(['./app.js'], ['build']);
+})
+
+gulp.task('default', ['build', 'watch', 'start_app']);
 

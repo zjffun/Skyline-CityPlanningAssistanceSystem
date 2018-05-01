@@ -20,5 +20,10 @@
     "rollup": "^0.56.2",
     "rollup-plugin-node-resolve": "^3.0.3"
   },
-  "homepage": "https://github.com/1010543618/Skyline-CityPlanningAssistanceSystem#readme"
+  "homepage": "https://github.com/1010543618/Skyline-CityPlanningAssistanceSystem#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "skyline-3dwindowsync": "^1.0.0",
+    "ws": "^5.1.1"
+  }
 }

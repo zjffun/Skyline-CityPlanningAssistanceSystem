@@ -1,4 +1,5 @@
-import {ribbon_data, ribbon_btns} from './load_ribbon_conf'
+import ribbon_data from './ribbon_data'
+import ribbon_btns from './ribbon_btn'
 import ribbon_click from './ribbon_click'
 export default function($skyline_ribbon){
   // 使用ribbon_data，ribbon_btns

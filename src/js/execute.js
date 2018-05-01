@@ -5,8 +5,8 @@ export default function(btn) {
     return
   }
   
-  Code = btn.exec.code
-  Parameter = btn.exec.para
+  var Code = btn.exec.code
+  var Parameter = btn.exec.para
   if (SGWorld.Command.CanExecute(Code, Parameter) == false) {
     alert("此工具当前不可用");
   } else {
