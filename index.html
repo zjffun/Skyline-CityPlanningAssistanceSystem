@@ -29,7 +29,7 @@
 <body id="skyline-layout" >
 
   <!-- 菜单栏 -->
-  <div data-options="region:'north',split:true" style="width:100%;height:150px;max-height:150px">
+  <div data-options="region:'north',split:'true'" style="width:100%;height:175px;max-height:175px">
     <div id="skyline-ribbon"></div>
   </div>
   <!-- 底部信息 -->
@@ -51,13 +51,34 @@
   <script type="text/javascript" src="./dist/skyline.cpas.js"></script>
   <script>
     $(window).load(function(){
+      var request = GetRequest();
+      request.u = request.u || '匿名'
+      request.r = request.r || '未知角色'
+      request.t = request.t || 0
+      console.log(request)
       // 加载布局
-      var $skyline_layout = CPAS.load_layout($('#skyline-layout'))
+      var $skyline_layout = CPAS.load_layout($('#skyline-layout'), request)
       // 加载工具条
-      window.$SR = CPAS.load_ribbon($('#skyline-ribbon'))
+      if ($.inArray(request.r, ['管理员','环保','林业','发改委']) !== -1) {
+        window.$SR = CPAS.load_ribbon($('#skyline-ribbon'), request)
+      }
       // 加载skyline
-      CPAS.load_fly($skyline_layout)
+      CPAS.load_fly($skyline_layout, request)
     });
+    // 获取url中的get参数
+    function GetRequest() {  
+       var url = location.search; //获取url中"?"符后的字串  
+       var theRequest = new Object();  
+       if (url.indexOf("?") != -1) {  
+          var gstr = url.substr(1);  
+          gs = gstr.split("&")
+          for(var i = 0; i < gs.length; i ++) {
+            var g = gs[i].split("=")
+            theRequest[g[0]] = decodeURI(g[1]);  
+          }
+       }  
+       return theRequest;  
+    }
   </script>
 </body>
 </html>

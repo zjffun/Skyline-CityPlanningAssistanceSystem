@@ -1,7 +1,7 @@
 var CPAS = (function (exports) {
 'use strict';
 
-function load_fly($skyline_layout){
+function load_fly($skyline_layout, request){
   // if (!$.isFunction(SGWorld.Open)) {
   //   var msg = '<div>\
   //     <p>1.本系统只支持IE内核浏览器，请使用IE9以上版本的浏览器访问本站；</p>\
@@ -11,8 +11,12 @@ function load_fly($skyline_layout){
   // }
   
   // 直接通过id就能调用该dom
-  $skyline_layout.layout('panel', 'west')
+  if ($.inArray(request.r, ['管理员','环保','林业','发改委']) !== -1) {
+    $skyline_layout.layout('panel', 'west')
     .append('<object id="TerraExplorerInformationWindow" classid="CLSID:3a4f9193-65a8-11d5-85c1-0001023952c1" style="width: 100%;height: calc(100% - 5px);"></object>');
+  }else{
+    $skyline_layout.layout('remove', 'west');
+  }
   $skyline_layout.layout('panel', 'center')
     .append('<object id="TerraExplorer3DWindow" classid="CLSID:3a4f9192-65a8-11d5-85c1-0001023952c1" style="width: 100%;height: calc(100% - 5px);"></object>');
   $('body').append('<object id="SGWorld" classid="CLSID:3a4f9197-65a8-11d5-85c1-0001023952c1" style="visibility:hidden;"></object>');
@@ -2068,9 +2072,11 @@ function ribbon_click(name, target){
   }
 }
 
-function load_ribbon($skyline_ribbon){
+function load_ribbon($skyline_ribbon, request){
   // 使用ribbon_data，ribbon_btns
+  ribbon_data.selected = parseInt(request.t);
   console.log(ribbon_data,ribbon_btns);
+
   // 给jquery easyui拓展label
   $.fn.label = function(options){
     if (typeof options == 'object'){
@@ -2101,18 +2107,43 @@ function load_ribbon($skyline_ribbon){
       console.log(name, target);
       ribbon_click(name, target);
     }
-  }).tabs({
+  });
+
+  /*  
+  .tabs({
     onSelect: function(title, index){
       // 选择了tab（从0开始）
-      
+      switch(index){
+        case 0:
+          break;
+        case 1:
+          break;
+        case 2:
+          break;
+        case 3:
+          break;
+        default:
+          break;
+      }
     }
   });
+  */
+
   ribbon.btns = ribbon_btns;
   return ribbon
 }
 
-function load_layout($skyline_layout){
-  return $skyline_layout.layout()
+function load_layout($skyline_layout, request){
+  $skyline_layout.layout();
+  var conf = {title: request.r + '-' + request.u};
+  if ($.inArray(request.r, ['管理员','环保','林业','发改委']) === -1) {
+    conf.height = 1;
+    conf.split = false;
+  }
+  // 修改完要重新生成一下
+  $skyline_layout.layout('panel', 'north').panel(conf);
+  $skyline_layout.layout();
+  return $skyline_layout
 }
 
 exports.load_fly = load_fly;

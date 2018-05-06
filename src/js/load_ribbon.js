@@ -1,11 +1,14 @@
 import ribbon_data from './ribbon_data'
 import ribbon_btns from './ribbon_btn'
 import ribbon_click from './ribbon_click'
-export default function($skyline_ribbon){
+export default function($skyline_ribbon, request){
   // 使用ribbon_data，ribbon_btns
   ribbon_data
   ribbon_btns
+  // 修改ribbon默认设置
+  ribbon_data.selected = parseInt(request.t)
   console.log(ribbon_data,ribbon_btns)
+
   // 给jquery easyui拓展label
   $.fn.label = function(options){
     if (typeof options == 'object'){
@@ -36,7 +39,10 @@ export default function($skyline_ribbon){
       console.log(name, target)
       ribbon_click(name, target)
     }
-  }).tabs({
+  })
+
+  /*  
+  .tabs({
     onSelect: function(title, index){
       // 选择了tab（从0开始）
       switch(index){
@@ -53,6 +59,8 @@ export default function($skyline_ribbon){
       }
     }
   });
+  */
+
   ribbon.btns = ribbon_btns
   return ribbon
 }
