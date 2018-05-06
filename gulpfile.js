@@ -8,11 +8,14 @@ gulp.task('build', () => {
 });
 
 gulp.task('watch', () => {
-  gulp.watch(['./src/js/*.js', './src/rollup.js'], ['build']);
+  gulp.watch(['./src/js/*.js', './src/rollup.js', './app.js', './dapp.js'], ['build']);
 })
 
 gulp.task('start_app', () => {
   exec('node app', function(err, stdout, stderr) {
+    console.log(stderr);
+  });
+  exec('node dapp', function(err, stdout, stderr) {
     console.log(stderr);
   });
   gulp.watch(['./app.js'], ['build']);

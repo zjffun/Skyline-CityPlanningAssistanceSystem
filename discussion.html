@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>阜新市三维规划辅助系统-多方案对比分析</title>
+  <link rel="stylesheet" type="text/css" href="./jquery-easyui/easyui.css">
+  <link rel="stylesheet" type="text/css" href="./jquery-easyui/icon.css">
+  <link rel="stylesheet" type="text/css" href="./jquery-easyui/ribbon.css">
+  <link rel="stylesheet" type="text/css" href="./jquery-easyui/ribbon-icon.css">
+  <link rel="stylesheet" type="text/css" href="./css/skyline-ribbon-icon.css">
+  <style>
+  /*修改最大的按钮的样式*/
+  .l-btn-large .l-btn-icon-top .l-btn-icon {
+    margin: 0 0 0 -16px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+  }
+  .l-btn-large .l-btn-icon-top .l-btn-text {
+    margin-top: 32px;
+    line-height: 24px;
+    min-width: 32px;
+  }
+  </style>
+</head>
+<body>
+  <!-- 底部信息 -->
+  <div data-options="region:'south'" style="height:40px; line-height: 40px; text-align: center; overflow: hidden">
+    ©&nbsp;2018&nbsp;辽宁工程技术大学&nbsp;测绘与地理科学学院&nbsp;地理信息科学专业14级&nbsp;张举丰
+  </div>
+  <div data-options="region:'center'" title="">
+  </div>
+  <div data-options="region:'east',split:true,width:300" title="消息">
+      <div style="height: 25px;">
+        <input type="text" style="box-sizing: border-box;width:calc(100% - 60px);height: 25px;"><button id="send" style="box-sizing: border-box;width: 60px; height: 25px;margin-top: 3px">发送</button>
+      </div>
+      <div id="room" style="height: calc(100% - 25px); overflow-y: scroll">
+      </div>
+  </div>
+  <script src="./node_modules/jquery/dist/jquery.js"></script>
+  <script type="text/javascript" src="./jquery-easyui/jquery.easyui.min.js"></script>
+  <script type="text/javascript" src="./jquery-easyui/jquery.ribbon.js"></script>
+  <script src="./node_modules/skyline-3dwindowsync/dist/s3dws.js"></script>
+  <script>
+    $(function(){
+      /*
+        加载页面时如果有JS改动了object节点可能会导致Skyline插件失效
+        （eg：使用jquery-easyui时先加载object再初始化界面Skyline插件会失效）
+        所以应该在页面完成动态加载object节点
+      */
+      window.request = GetRequest()
+      request.title = request.title || '协同会商'
+      request.u = request.u || '匿名'
+      request.r = request.r || '未知角色'
+      var $layout = $('body').layout()
+      $layout.layout('panel', 'center')
+        .append('<object id="TerraExplorer3DWindow" classid="CLSID:3a4f9192-65a8-11d5-85c1-0001023952c1" style="width: 100%;height: calc(100% - 5px);"></object>')
+      $('body').append('<object id="SGWorld" classid="CLSID:3a4f9197-65a8-11d5-85c1-0001023952c1" style="visibility:hidden;"></object>')
+      $layout.layout('panel', 'center').panel({'title': request.title})
+      $layout.layout('panel', 'east').panel({'title': request.r + '-' + request.u})
+      // 配置fly_path
+      // fly可以直接发布成网络的，但mpt的发布成网络的必须装TerraGate Manager，还是获取路径用本地的比较方便
+      $.get("./get_path", function(path){
+        window.s3 = s3dws.init({fly_path: path + "\\data\\test.fly"})
+      })
+
+      // 消息
+      ChatServer = new WebSocket('ws://127.0.0.1:28848');
+      ChatServer.onopen = function (e) {
+        (typeof e == 'string') && this.send(e);//向后台发送数据
+      };
+      ChatServer.onclose = function (e) {//当链接关闭的时候触发
+
+      };
+      ChatServer.onmessage = function (e) {//后台返回消息的时候触发
+        // console.log('get_sync_info')
+        // console.log(data)
+        // var sync_info = JSON.parse(e.data).sync_info
+        // var pos_arr = sync_info.pos
+        // var pos = SGWorld.Creator.CreatePosition(pos_arr[0], pos_arr[1], pos_arr[2], pos_arr[3], pos_arr[4], pos_arr[5]);
+        // SGWorld.Navigate.SetPosition(pos);
+        var data = JSON.parse(e.data)
+        $('#room').append('<p style="text-align:left">'+data.user + ':'+ data.msg+'</p>')
+        console.log(data)
+      };
+      ChatServer.onerror = function (e) {//错误情况触发
+
+      }
+    });
+      $('#send').click(function(){
+        var msg = $(this).prev().val()
+        var user = request.r + '-' + request.u
+        $('#room').append('<p style="text-align:right">'+msg+'</p>')
+        ChatServer.onopen(JSON.stringify({msg:msg,user:user}))
+      })
+    // 获取url中的get参数
+    function GetRequest() {  
+       var url = location.search; //获取url中"?"符后的字串  
+       var theRequest = new Object();  
+       if (url.indexOf("?") != -1) {  
+          var gstr = url.substr(1);  
+          gs = gstr.split("&")
+          for(var i = 0; i < gs.length; i ++) {
+            var g = gs[i].split("=")
+            theRequest[g[0]] = decodeURI(g[1]);  
+          }
+       }  
+       return theRequest;  
+    }
+  </script>
+</body>
+</html>
+
