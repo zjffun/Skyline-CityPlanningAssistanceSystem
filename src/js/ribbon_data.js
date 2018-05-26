@@ -1102,7 +1102,7 @@ export default {
           "title": "视频监控",
           "tools": [
             {
-              "name": "",
+              "name": "show_monitor",
               "text": "查看摄像头",
               "iconCls": "icon-showcamera icon-large",
               "iconAlign": "top",

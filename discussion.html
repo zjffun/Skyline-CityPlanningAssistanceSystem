@@ -87,12 +87,14 @@
 
       }
     });
-      $('#send').click(function(){
-        var msg = $(this).prev().val()
-        var user = request.r + '-' + request.u
-        $('#room').append('<p style="text-align:right">'+msg+'</p>')
-        ChatServer.onopen(JSON.stringify({msg:msg,user:user}))
-      })
+
+    $('#send').click(function(){
+      var msg = $(this).prev().val()
+      var user = request.r + '-' + request.u
+      $('#room').append('<p style="text-align:right">'+msg+'</p>')
+      ChatServer.onopen(JSON.stringify({msg:msg,user:user}))
+    })
+    
     // 获取url中的get参数
     function GetRequest() {  
        var url = location.search; //获取url中"?"符后的字串  

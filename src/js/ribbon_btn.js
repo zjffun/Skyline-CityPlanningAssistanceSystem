@@ -837,4 +837,31 @@ export default {
     },
     "btn_type": "toggle"
   },
+  "show_monitor": {
+    "exec": function(){
+      // 选择组
+      var ms = SGWorld.ProjectTree.FindItem("监控");
+      // 选监控
+      var node = SGWorld.ProjectTree.GetNextItem(ms, 11);
+      // 临时组
+      var temp_g = SGWorld.ProjectTree.CreateGroup("监控temp");
+      while (node){
+          var object = SGWorld.ProjectTree.GetObject(node);
+          console.log(object.Terrain.BBox.MaxX, object.Terrain.BBox.MinX);
+          var x = (object.Terrain.BBox.MaxX + object.Terrain.BBox.MinX)/2
+          var y = (object.Terrain.BBox.MaxY + object.Terrain.BBox.MinY)/2
+          var circle = SGWorld.Creator.CreateCircle(
+            SGWorld.Creator.CreatePosition(x, y ,5),  // Pivot
+            1000.0,                                                     // Radius (1000m)
+            SGWorld.Creator.CreateColor(0, 0, 0, 0),                    // Outline color (in this sample, transparent/no outline)
+            SGWorld.Creator.CreateColor(255, 0, 0, 128),               // Fill color
+            temp_g
+          );
+          // 13 is get next sibling
+          node = SGWorld.ProjectTree.GetNextItem(node, 13);
+      }
+    },
+    "btn_type": "toggle"
+  },
+  
 }
