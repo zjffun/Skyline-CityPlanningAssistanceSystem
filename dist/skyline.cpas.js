@@ -21,7 +21,7 @@ function load_fly($skyline_layout, request){
     .append('<object id="TerraExplorer3DWindow" classid="CLSID:3a4f9192-65a8-11d5-85c1-0001023952c1" style="width: 100%;height: calc(100% - 5px);"></object>');
   $('body').append('<object id="SGWorld" classid="CLSID:3a4f9197-65a8-11d5-85c1-0001023952c1" style="visibility:hidden;"></object>');
   $.get("./get_path", function(path){
-    SGWorld.Open(path + "\\data\\test.fly");
+    SGWorld.Open(path + "\\skyline_data\\debug\\test.fly");
   });
 }
 
@@ -1145,7 +1145,7 @@ var ribbon_data = {
           "title": "视频监控",
           "tools": [
             {
-              "name": "",
+              "name": "show_monitor",
               "text": "查看摄像头",
               "iconCls": "icon-showcamera icon-large",
               "iconAlign": "top",
@@ -1161,13 +1161,6 @@ var ribbon_data = {
               "name": "",
               "text": "下一个",
               "iconCls": "icon-prev icon-large",
-              "iconAlign": "top",
-              "size": "large",
-            },
-            {
-              "name": "",
-              "text": "监控范围",
-              "iconCls": "icon-range icon-large",
               "iconAlign": "top",
               "size": "large",
             }
@@ -2017,6 +2010,72 @@ var ribbon_btns = {
     },
     "btn_type": "toggle"
   },
+  "show_monitor": {
+    "exec": function(){
+      if(!this.selected){
+        window.MONITOR = [];
+        // 选择组
+        var ms = SGWorld.ProjectTree.FindItem("监控");
+        // 选监控
+        var node = SGWorld.ProjectTree.GetNextItem(ms, 11);
+        // 临时组
+        var temp_g = SGWorld.ProjectTree.FindItem("监控temp") ? 
+          SGWorld.ProjectTree.FindItem("监控temp") :
+          SGWorld.ProjectTree.CreateGroup("监控temp");
+        while (node){
+            window.MONITOR.push(node);
+            var object = SGWorld.ProjectTree.GetObject(node);
+            console.log(object.Terrain.BBox.MaxX, object.Terrain.BBox.MinX);
+            var x = (object.Terrain.BBox.MaxX + object.Terrain.BBox.MinX)/2;
+            var y = (object.Terrain.BBox.MaxY + object.Terrain.BBox.MinY)/2;
+            var circle = SGWorld.Creator.CreateCircle(
+              SGWorld.Creator.CreatePosition(x, y ,5),  // Pivot
+              1000.0,                                                     // Radius (1000m)
+              SGWorld.Creator.CreateColor(0, 0, 0, 0),                    // Outline color (in this sample, transparent/no outline)
+              SGWorld.Creator.CreateColor(255, 0, 0, 128),               // Fill color
+              temp_g
+            );
+            // 13 is get next sibling
+            node = SGWorld.ProjectTree.GetNextItem(node, 13);
+        }
+        this.onLButtonDown = function(flags, x, y){
+            /*
+              var mouseInfo = SGWorld.Window.GetMouseInfo();
+              mouseInfo.x, mouseInfo.y和参数x，y一样
+            */
+            //将平面坐标转换为球面坐标  
+            var worldPst = SGWorld.Window.PixelToWorld(x, y, -1);
+            var clicked_obj = SGWorld.Creator.GetObject(worldPst.ObjectID);
+            if(clicked_obj && -1 !== $.inArray(worldPst.ObjectID, window.MONITOR)){
+              window.MONITOR_POPUP && SGWorld.Window.RemovePopup(window.MONITOR_POPUP);
+              var name = clicked_obj.TreeItem.Name;
+              window.MONITOR_POPUP = SGWorld.Creator.CreatePopupMessage(name, 
+                "", 0, 0);
+              var popup = MONITOR_POPUP;
+
+              popup.Height = 400;
+              popup.Width = 550;
+              // popup.Align = "center";没有center选项
+              /*popup.InnerHTML = '<video src="./security_video/'+name+'.mp4" controls="controls">'+
+                '您的浏览器不支持 video 标签。'+
+                '</video>';*/
+              popup.InnerHTML = '<video width="100%" height="100%" src="http://localhost:8848/security_video/PSG2_parta_baofeng.mp4" controls="controls">'+
+                '您的浏览器不支持 video 标签。'+
+                '</video>';
+              SGWorld.Window.ShowPopup(popup);
+            }
+            return true; // event was processed by the client. return false to allow additional processing of the event.
+        };
+        SGWorld.AttachEvent("onLButtonDown", this.onLButtonDown);
+      }else{
+        window.MONITOR_POPUP && SGWorld.Window.RemovePopup(window.MONITOR_POPUP);
+        SGWorld.DetachEvent("onLButtonDown", this.onLButtonDown);
+        SGWorld.ProjectTree.DeleteItem(SGWorld.ProjectTree.FindItem("监控temp"));
+      }
+    },
+    "btn_type": "toggle"
+  },
+  
 }
 
 function ribbon_click(name, target){
@@ -2037,9 +2096,9 @@ function ribbon_click(name, target){
       }else{
         $(target).linkbutton('unselect');
       }
+      btn.selected = selected;
       execute(btn);
       break
-      
     case 'toggle_group_work_area':
       if(!selected){
         $SR.find("[group='work_area']").removeClass('l-btn-selected l-btn-plain-selected');

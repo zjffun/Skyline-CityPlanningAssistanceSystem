@@ -839,26 +839,65 @@ export default {
   },
   "show_monitor": {
     "exec": function(){
-      // 选择组
-      var ms = SGWorld.ProjectTree.FindItem("监控");
-      // 选监控
-      var node = SGWorld.ProjectTree.GetNextItem(ms, 11);
-      // 临时组
-      var temp_g = SGWorld.ProjectTree.CreateGroup("监控temp");
-      while (node){
-          var object = SGWorld.ProjectTree.GetObject(node);
-          console.log(object.Terrain.BBox.MaxX, object.Terrain.BBox.MinX);
-          var x = (object.Terrain.BBox.MaxX + object.Terrain.BBox.MinX)/2
-          var y = (object.Terrain.BBox.MaxY + object.Terrain.BBox.MinY)/2
-          var circle = SGWorld.Creator.CreateCircle(
-            SGWorld.Creator.CreatePosition(x, y ,5),  // Pivot
-            1000.0,                                                     // Radius (1000m)
-            SGWorld.Creator.CreateColor(0, 0, 0, 0),                    // Outline color (in this sample, transparent/no outline)
-            SGWorld.Creator.CreateColor(255, 0, 0, 128),               // Fill color
-            temp_g
-          );
-          // 13 is get next sibling
-          node = SGWorld.ProjectTree.GetNextItem(node, 13);
+      if(!this.selected){
+        window.MONITOR = [];
+        // 选择组
+        var ms = SGWorld.ProjectTree.FindItem("监控");
+        // 选监控
+        var node = SGWorld.ProjectTree.GetNextItem(ms, 11);
+        // 临时组
+        var temp_g = SGWorld.ProjectTree.FindItem("监控temp") ? 
+          SGWorld.ProjectTree.FindItem("监控temp") :
+          SGWorld.ProjectTree.CreateGroup("监控temp");
+        while (node){
+            window.MONITOR.push(node);
+            var object = SGWorld.ProjectTree.GetObject(node);
+            console.log(object.Terrain.BBox.MaxX, object.Terrain.BBox.MinX);
+            var x = (object.Terrain.BBox.MaxX + object.Terrain.BBox.MinX)/2
+            var y = (object.Terrain.BBox.MaxY + object.Terrain.BBox.MinY)/2
+            var circle = SGWorld.Creator.CreateCircle(
+              SGWorld.Creator.CreatePosition(x, y ,5),  // Pivot
+              1000.0,                                                     // Radius (1000m)
+              SGWorld.Creator.CreateColor(0, 0, 0, 0),                    // Outline color (in this sample, transparent/no outline)
+              SGWorld.Creator.CreateColor(255, 0, 0, 128),               // Fill color
+              temp_g
+            );
+            // 13 is get next sibling
+            node = SGWorld.ProjectTree.GetNextItem(node, 13);
+        }
+        this.onLButtonDown = function(flags, x, y){
+            /*
+              var mouseInfo = SGWorld.Window.GetMouseInfo();
+              mouseInfo.x, mouseInfo.y和参数x，y一样
+            */
+            //将平面坐标转换为球面坐标  
+            var worldPst = SGWorld.Window.PixelToWorld(x, y, -1);
+            var clicked_obj = SGWorld.Creator.GetObject(worldPst.ObjectID)
+            if(clicked_obj && -1 !== $.inArray(worldPst.ObjectID, window.MONITOR)){
+              window.MONITOR_POPUP && SGWorld.Window.RemovePopup(window.MONITOR_POPUP);
+              var name = clicked_obj.TreeItem.Name;
+              window.MONITOR_POPUP = SGWorld.Creator.CreatePopupMessage(name, 
+                "", 0, 0);
+              var popup = MONITOR_POPUP;
+
+              popup.Height = 400;
+              popup.Width = 550;
+              // popup.Align = "center";没有center选项
+              /*popup.InnerHTML = '<video src="./security_video/'+name+'.mp4" controls="controls">'+
+                '您的浏览器不支持 video 标签。'+
+                '</video>';*/
+              popup.InnerHTML = '<video width="100%" height="100%" src="http://localhost:8848/security_video/PSG2_parta_baofeng.mp4" controls="controls">'+
+                '您的浏览器不支持 video 标签。'+
+                '</video>';
+              SGWorld.Window.ShowPopup(popup);
+            }
+            return true; // event was processed by the client. return false to allow additional processing of the event.
+        }
+        SGWorld.AttachEvent("onLButtonDown", this.onLButtonDown);
+      }else{
+        window.MONITOR_POPUP && SGWorld.Window.RemovePopup(window.MONITOR_POPUP);
+        SGWorld.DetachEvent("onLButtonDown", this.onLButtonDown);
+        SGWorld.ProjectTree.DeleteItem(SGWorld.ProjectTree.FindItem("监控temp"));
       }
     },
     "btn_type": "toggle"

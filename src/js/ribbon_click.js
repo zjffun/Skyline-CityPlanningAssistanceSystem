@@ -17,9 +17,9 @@ export default function(name, target){
       }else{
         $(target).linkbutton('unselect')
       }
+      btn.selected = selected;
       execute(btn)
       break
-      toggle_group_round
     case 'toggle_group_work_area':
       if(!selected){
         $SR.find("[group='work_area']").removeClass('l-btn-selected l-btn-plain-selected')

@@ -1120,13 +1120,6 @@ export default {
               "iconCls": "icon-prev icon-large",
               "iconAlign": "top",
               "size": "large",
-            },
-            {
-              "name": "",
-              "text": "监控范围",
-              "iconCls": "icon-range icon-large",
-              "iconAlign": "top",
-              "size": "large",
             }
           ]
         }
