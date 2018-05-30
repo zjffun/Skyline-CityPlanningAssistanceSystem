@@ -1152,13 +1152,13 @@ var ribbon_data = {
               "size": "large",
             },
             {
-              "name": "",
+              "name": "prev_monitor",
               "text": "上一个",
               "iconCls": "icon-next icon-large",
               "iconAlign": "top",
               "size": "large",
             },{
-              "name": "",
+              "name": "next_monitor",
               "text": "下一个",
               "iconCls": "icon-prev icon-large",
               "iconAlign": "top",
@@ -2030,7 +2030,7 @@ var ribbon_btns = {
             var y = (object.Terrain.BBox.MaxY + object.Terrain.BBox.MinY)/2;
             var circle = SGWorld.Creator.CreateCircle(
               SGWorld.Creator.CreatePosition(x, y ,5),  // Pivot
-              1000.0,                                                     // Radius (1000m)
+              5.0,                                                     // Radius (1000m)
               SGWorld.Creator.CreateColor(0, 0, 0, 0),                    // Outline color (in this sample, transparent/no outline)
               SGWorld.Creator.CreateColor(255, 0, 0, 128),               // Fill color
               temp_g
@@ -2046,36 +2046,74 @@ var ribbon_btns = {
             //将平面坐标转换为球面坐标  
             var worldPst = SGWorld.Window.PixelToWorld(x, y, -1);
             var clicked_obj = SGWorld.Creator.GetObject(worldPst.ObjectID);
-            if(clicked_obj && -1 !== $.inArray(worldPst.ObjectID, window.MONITOR)){
-              window.MONITOR_POPUP && SGWorld.Window.RemovePopup(window.MONITOR_POPUP);
-              var name = clicked_obj.TreeItem.Name;
-              window.MONITOR_POPUP = SGWorld.Creator.CreatePopupMessage(name, 
-                "", 0, 0);
-              var popup = MONITOR_POPUP;
-
-              popup.Height = 400;
-              popup.Width = 550;
-              // popup.Align = "center";没有center选项
-              /*popup.InnerHTML = '<video src="./security_video/'+name+'.mp4" controls="controls">'+
-                '您的浏览器不支持 video 标签。'+
-                '</video>';*/
-              popup.InnerHTML = '<video width="100%" height="100%" src="http://localhost:8848/security_video/PSG2_parta_baofeng.mp4" controls="controls">'+
-                '您的浏览器不支持 video 标签。'+
-                '</video>';
-              SGWorld.Window.ShowPopup(popup);
+            var cur = $.inArray(worldPst.ObjectID, window.MONITOR);
+            if(clicked_obj && -1 !== cur){
+              window.MONITOR.cur = cur;
+              $SR.btns['paly_video'](clicked_obj.TreeItem.Name);
             }
             return true; // event was processed by the client. return false to allow additional processing of the event.
         };
         SGWorld.AttachEvent("onLButtonDown", this.onLButtonDown);
       }else{
-        window.MONITOR_POPUP && SGWorld.Window.RemovePopup(window.MONITOR_POPUP);
+        // 清除全部视频
+        for(var i=0; i<window.MONITOR.length; ++i){
+          var o = SGWorld.Creator.GetObject(window.MONITOR[i]);
+          SGWorld.Window.RemovePopupByCaption(o.TreeItem.Name);
+        }
+        
         SGWorld.DetachEvent("onLButtonDown", this.onLButtonDown);
         SGWorld.ProjectTree.DeleteItem(SGWorld.ProjectTree.FindItem("监控temp"));
       }
     },
     "btn_type": "toggle"
   },
-  
+  "prev_monitor": {
+    "exec": function(){
+      var m = window.MONITOR;
+      if(0 == m.cur){
+        m.cur = m.length-1;
+      }else{
+        (m.cur)--;
+      }
+      
+      var clicked_obj = SGWorld.Creator.GetObject(m[m.cur]);
+      $SR.btns['paly_video'](clicked_obj.TreeItem.Name);
+    },
+    "btn_type": "imm"
+  },
+  "next_monitor": {
+    "exec": function(){
+      var m = window.MONITOR;
+      if(m.length-1 == m.cur){
+        m.cur = 0;
+      }else{
+        (m.cur)++;
+      }
+      
+      var clicked_obj = SGWorld.Creator.GetObject(m[m.cur]);
+      $SR.btns['paly_video'](clicked_obj.TreeItem.Name);
+    },
+    "btn_type": "imm"
+  },
+  paly_video: function(name){
+    // 这里关闭有bug
+    // SGWorld.Window.RemovePopupByCaption(window.MONITOR.cap);
+    // window.MONITOR.cap = name;
+    // setTimeout(function(){
+    //   var name = window.MONITOR.cap
+      var popup = SGWorld.Window.GetPopupByCaption(window.MONITOR.cap) || SGWorld.Creator.CreatePopupMessage(name, "", 0, 0);
+      popup.Height = 400;
+      popup.Width = 550;
+      popup.Align = "left top";
+      /*popup.InnerHTML = '<video src="./security_video/'+name+'.mp4" controls="controls">'+
+        '您的浏览器不支持 video 标签。'+
+        '</video>';*/
+      popup.InnerHTML = '<video width="100%" height="100%" src="http://localhost:8848/security_video/'+name+'.mp4" autoplay="autoplay">'+
+        '您的浏览器不支持 video 标签。'+
+        '</video>';
+      SGWorld.Window.ShowPopup(popup);
+    // }, 2000)
+  }
 }
 
 function ribbon_click(name, target){

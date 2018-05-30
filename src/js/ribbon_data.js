@@ -1109,13 +1109,13 @@ export default {
               "size": "large",
             },
             {
-              "name": "",
+              "name": "prev_monitor",
               "text": "上一个",
               "iconCls": "icon-next icon-large",
               "iconAlign": "top",
               "size": "large",
             },{
-              "name": "",
+              "name": "next_monitor",
               "text": "下一个",
               "iconCls": "icon-prev icon-large",
               "iconAlign": "top",
