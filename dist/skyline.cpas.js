@@ -21,7 +21,8 @@ function load_fly($skyline_layout, request){
     .append('<object id="TerraExplorer3DWindow" classid="CLSID:3a4f9192-65a8-11d5-85c1-0001023952c1" style="width: 100%;height: calc(100% - 5px);"></object>');
   $('body').append('<object id="SGWorld" classid="CLSID:3a4f9197-65a8-11d5-85c1-0001023952c1" style="visibility:hidden;"></object>');
   $.get("./get_path", function(path){
-    SGWorld.Open(path + "\\skyline_data\\debug\\test.fly");
+    SGWorld.Open(path + "\\skyline_data\\SkylineDataForCPAS\\Default.fly");
+    SGWorld.ProjectTree.SetVisibility(SGWorld.ProjectTree.FindItem("红线"), false);
   });
 }
 
@@ -1126,14 +1127,14 @@ var ribbon_data = {
           "title": "用地红线",
           "tools": [
             {
-              "name": "",
+              "name": "show_rl",
               "text": "显示红线",
               "iconCls": "icon-showrl icon-large",
               "iconAlign": "top",
               "size": "large",
             },
             {
-              "name": "",
+              "name": "rl_ana",
               "text": "红线检测",
               "iconCls": "icon-anarl icon-large",
               "iconAlign": "top",
@@ -2077,6 +2078,8 @@ var ribbon_btns = {
       }
       
       var clicked_obj = SGWorld.Creator.GetObject(m[m.cur]);
+      // 移动摄像机
+      SGWorld.Navigate.FlyTo(clicked_obj);
       $SR.btns['paly_video'](clicked_obj.TreeItem.Name);
     },
     "btn_type": "imm"
@@ -2091,9 +2094,44 @@ var ribbon_btns = {
       }
       
       var clicked_obj = SGWorld.Creator.GetObject(m[m.cur]);
+      // 移动摄像机
+      SGWorld.Navigate.FlyTo(clicked_obj);
       $SR.btns['paly_video'](clicked_obj.TreeItem.Name);
     },
     "btn_type": "imm"
+  },
+  "show_rl": {
+    "exec": function(){
+      var groupID = SGWorld.ProjectTree.FindItem("红线");  
+      SGWorld.ProjectTree.SetVisibility(groupID, !this.selected);
+    },
+    "btn_type": "toggle"
+  },
+  "rl_ana": {
+    "exec": function(){
+      // 选择组
+      var groupID = SGWorld.ProjectTree.FindItem("红线");  
+      // 选红线
+      var node = SGWorld.ProjectTree.GetNextItem(groupID, 11);
+      if(!this.selected){
+        while (node){
+            // 修改透明度为100
+            var object = SGWorld.ProjectTree.GetObject(node);
+            object.FillStyle.Color.SetAlpha(100);
+            // 13 is get next sibling
+            node = SGWorld.ProjectTree.GetNextItem(node, 13);
+        }
+      }else{
+        while (node){
+            // 修改透明度为0
+            var object = SGWorld.ProjectTree.GetObject(node);
+            object.FillStyle.Color.SetAlpha(0);
+            // 13 is get next sibling
+            node = SGWorld.ProjectTree.GetNextItem(node, 13);
+        }
+      }
+    },
+    "btn_type": "toggle"
   },
   paly_video: function(name){
     // 这里关闭有bug
@@ -2101,10 +2139,9 @@ var ribbon_btns = {
     // window.MONITOR.cap = name;
     // setTimeout(function(){
     //   var name = window.MONITOR.cap
-      var popup = SGWorld.Window.GetPopupByCaption(window.MONITOR.cap) || SGWorld.Creator.CreatePopupMessage(name, "", 0, 0);
-      popup.Height = 400;
-      popup.Width = 550;
-      popup.Align = "left top";
+    //  var popup = SGWorld.Window.GetPopupByCaption(window.MONITOR.cap) || SGWorld.Creator.CreatePopupMessage(name, "", 0, 0);
+      var popup = SGWorld.Creator.CreatePopupMessage(name, "", 0, -100, 550, 400);
+      popup.Align = "right";
       /*popup.InnerHTML = '<video src="./security_video/'+name+'.mp4" controls="controls">'+
         '您的浏览器不支持 video 标签。'+
         '</video>';*/
@@ -2113,7 +2150,9 @@ var ribbon_btns = {
         '</video>';
       SGWorld.Window.ShowPopup(popup);
     // }, 2000)
-  }
+  },
+
+    
 }
 
 function ribbon_click(name, target){

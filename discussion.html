@@ -61,7 +61,7 @@
       // 配置fly_path
       // fly可以直接发布成网络的，但mpt的发布成网络的必须装TerraGate Manager，还是获取路径用本地的比较方便
       $.get("./get_path", function(path){
-        window.s3 = s3dws.init({fly_path: path + "\\data\\test.fly"})
+        window.s3 = s3dws.init({fly_path: path + "\\skyline_data\\SkylineDataForSimple\\test.fly"})
       })
 
       // 消息

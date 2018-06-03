@@ -1,3 +1,5 @@
 /node_modules
-/skyline_data
+/skyline_data/*
 /security_video
+
+!/skyline_data/SkylineDataForSimple

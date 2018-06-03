@@ -1083,14 +1083,14 @@ export default {
           "title": "用地红线",
           "tools": [
             {
-              "name": "",
+              "name": "show_rl",
               "text": "显示红线",
               "iconCls": "icon-showrl icon-large",
               "iconAlign": "top",
               "size": "large",
             },
             {
-              "name": "",
+              "name": "rl_ana",
               "text": "红线检测",
               "iconCls": "icon-anarl icon-large",
               "iconAlign": "top",

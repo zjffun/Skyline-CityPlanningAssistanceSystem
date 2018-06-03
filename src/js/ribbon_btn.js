@@ -904,6 +904,8 @@ export default {
       }
       
       var clicked_obj = SGWorld.Creator.GetObject(m[m.cur]);
+      // 移动摄像机
+      SGWorld.Navigate.FlyTo(clicked_obj);
       $SR.btns['paly_video'](clicked_obj.TreeItem.Name);
     },
     "btn_type": "imm"
@@ -918,9 +920,44 @@ export default {
       }
       
       var clicked_obj = SGWorld.Creator.GetObject(m[m.cur]);
+      // 移动摄像机
+      SGWorld.Navigate.FlyTo(clicked_obj);
       $SR.btns['paly_video'](clicked_obj.TreeItem.Name);
     },
     "btn_type": "imm"
+  },
+  "show_rl": {
+    "exec": function(){
+      var groupID = SGWorld.ProjectTree.FindItem("红线");  
+      SGWorld.ProjectTree.SetVisibility(groupID, !this.selected);
+    },
+    "btn_type": "toggle"
+  },
+  "rl_ana": {
+    "exec": function(){
+      // 选择组
+      var groupID = SGWorld.ProjectTree.FindItem("红线");  
+      // 选红线
+      var node = SGWorld.ProjectTree.GetNextItem(groupID, 11);
+      if(!this.selected){
+        while (node){
+            // 修改透明度为100
+            var object = SGWorld.ProjectTree.GetObject(node);
+            object.FillStyle.Color.SetAlpha(100)
+            // 13 is get next sibling
+            node = SGWorld.ProjectTree.GetNextItem(node, 13);
+        }
+      }else{
+        while (node){
+            // 修改透明度为0
+            var object = SGWorld.ProjectTree.GetObject(node);
+            object.FillStyle.Color.SetAlpha(0)
+            // 13 is get next sibling
+            node = SGWorld.ProjectTree.GetNextItem(node, 13);
+        }
+      }
+    },
+    "btn_type": "toggle"
   },
   paly_video: function(name){
     // 这里关闭有bug
@@ -928,10 +965,9 @@ export default {
     // window.MONITOR.cap = name;
     // setTimeout(function(){
     //   var name = window.MONITOR.cap
-      var popup = SGWorld.Window.GetPopupByCaption(window.MONITOR.cap) || SGWorld.Creator.CreatePopupMessage(name, "", 0, 0);
-      popup.Height = 400;
-      popup.Width = 550;
-      popup.Align = "left top";
+    //  var popup = SGWorld.Window.GetPopupByCaption(window.MONITOR.cap) || SGWorld.Creator.CreatePopupMessage(name, "", 0, 0);
+      var popup = SGWorld.Creator.CreatePopupMessage(name, "", 0, -100, 550, 400);
+      popup.Align = "right";
       /*popup.InnerHTML = '<video src="./security_video/'+name+'.mp4" controls="controls">'+
         '您的浏览器不支持 video 标签。'+
         '</video>';*/
@@ -940,5 +976,7 @@ export default {
         '</video>';
       SGWorld.Window.ShowPopup(popup);
     // }, 2000)
-  }
+  },
+
+    
 }
